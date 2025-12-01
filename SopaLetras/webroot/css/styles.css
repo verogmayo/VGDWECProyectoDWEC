@@ -1,0 +1,249 @@
+:root {
+  --bgColor: #f7f7f7;
+  --headerColor: #c0c0c0;
+  --secondColor: #eaeaea;
+  --textColor: #3f3844;
+  --mainColor: #e354f3;
+  --mainColor2: #ec9bf5c0;
+  --mainColor3: #efadf79a;
+  --secondaryColor: #17b6f9;
+  --otherColor: #5d6c83;
+  --colorAmarillo:rgba(247, 247, 64, 0.849);
+}
+* {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+}
+html {
+  height: 100vh;
+  margin: 0;
+}
+h1 {
+  text-align: center;
+  padding: 1rem;
+}
+h2 {
+  text-align: center;
+  font-size: 35px;
+  margin: 10px;
+}
+header {
+  background-color: var(--headerColor);
+  margin: 0;
+  color: var(--mainColor);
+}
+body {
+  background-color: var(--mainColor3);
+  margin: 0;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+}
+@media (max-width: 992px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+  }
+}
+
+#cronometro {
+  width: 100px;
+  height: 30px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  border: #7009e6 solid 2px;
+  color: black;
+}
+/* 
+Boton Empezar
+=====================================================*/
+#bEmpezar{
+  height: 80px;
+  width: 300px;
+  background-color: var(--mainColor);
+  text-align: center;
+  line-height: 80px;
+  font-size: 30px;
+  font-weight: 700;
+}
+.desaparecido{
+  display: none; /*cuando aparece la sopa desaparece el botón y la tabla ocupa su lugar*/
+}
+/* 
+tabla sopa de letras
+=====================================================*/
+.tablaSopaLetras {
+  padding: 10px 50px;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.contenedorSopaLetras {
+  display: flex;
+  align-items: center;
+  /* height: auto; */
+  height: auto;
+}
+
+.tablaSopaLetras table {
+  border-collapse: collapse;
+  border: solid;
+}
+.tablaSopaLetras td {
+  border: 1px solid;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+.seleccionado {
+  background: var(--colorAmarillo);
+}
+td.incorrecto{
+  background: red;
+}
+td.correcto{
+  background: green;
+}
+/* 
+tabla ranking
+=====================================================*/
+.tPosicion {
+  border-radius: 10px;
+  padding: 10px 50px;
+  margin: 20px;
+  height: 250px;
+}
+#tablaPosicion {
+  margin: 20px;
+}
+#tablaPosicion table {
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#tablaPosicion th {
+  background-color: var(--mainColor);
+  color: white;
+  padding: 5px 30px;
+  font-size: 18px;
+  border: 1px solid #7009e6;
+}
+
+#tablaPosicion td {
+  text-align: center;
+  border: 1px solid #7009e6;
+}
+
+/* 
+Contenedor palabras a tachar
+=====================================================*/
+.lista{
+  margin-top: 50px;
+  border-top: #e354f3 2px solid;
+}
+.contenedorPalabras{
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.divPalabrasATachar{
+  font-size: 18px;
+  margin: 5px 10px;
+  text-align: center;
+}
+.tachado{
+  text-decoration:line-through;
+  color: gray;
+}
+/* 
+navegador offline
+=====================================================*/
+
+#navegadorOffline {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: red;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  font-size: 30px;
+}
+
+/* 
+Footer
+=====================================================*/
+
+footer {
+  background-color: var(--secondColor);
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  bottom: 0;
+  font-size: 20px;
+  background-color: var(--headerColor);
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-around;
+}
+@media (max-width: 992px) {
+  .footerContent {
+    display: flex;
+    flex-direction: column;
+  }
+}
+footer a {
+  font-size: 20px;
+}
+footer p {
+  margin-top: 15px;
+}
+
+#reloj {
+  flex-direction: row;
+  background-color: black;
+  height: 50px;
+  border-radius: 5px;
+  font-size: 24px;
+  margin-bottom: 0;
+  margin-top: 15px;
+  border: solid var(--mainColor);
+  padding: 5px;
+  & span {
+    color: yellow;
+  }
+}
+.num {
+  width: auto;
+  height: 30px;
+  margin: 0 3;
+}
+.generadorFuente {
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+}
