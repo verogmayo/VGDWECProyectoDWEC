@@ -1,23 +1,23 @@
 var arrayPalabras = [
  "LUNES",
-  "MARTES",
-  "MIERCOLES",
-  "JUEVES",
-  "VIERNES",
-  "SABADO",
-  "DOMINGO",
-  "ENERO",
-  "FEBRERO",
-  "MARZO",
-  "ABRIL",
-  "MAYO",
-  "JUNIO",
-  "JULIO",
-  "AGOSTO",
-  "SEPTIEMBRE",
-  "OCTUBRE",
-  "NOVIEMBRE",
-  "DICIEMBRE",
+  // "MARTES",
+  // "MIERCOLES",
+  // "JUEVES",
+  // "VIERNES",
+  // "SABADO",
+  // "DOMINGO",
+  // "ENERO",
+  // "FEBRERO",
+  // "MARZO",
+  // "ABRIL",
+  // "MAYO",
+  // "JUNIO",
+  // "JULIO",
+  // "AGOSTO",
+  // "SEPTIEMBRE",
+  // "OCTUBRE",
+  // "NOVIEMBRE",
+  // "DICIEMBRE"
 ];
 
 /**
@@ -470,20 +470,20 @@ return letrasSeleccionadas;
 function comprobarPalabra(palSelec,revPalb,aPalabras) {
     
   if (aPalabras.includes(palSelec) || aPalabras.includes(revPalb)){
-    seleccionado=document.querySelectorAll(".seleccionado")
+   let seleccionado=document.querySelectorAll(".seleccionado")
     
-    for(casilla of seleccionado ){
+    for(let casilla of seleccionado ){
       casilla.classList.remove("seleccionado");
       casilla.classList.add("correcto");
     }
     tacharPalabras(palSelec,revPalb,aPalabras);
   }else{
-      for(casilla of document.querySelectorAll(".seleccionado")){
+      for(let casilla of document.querySelectorAll(".seleccionado")){
       casilla.classList.remove("seleccionado");
       casilla.classList.add("incorrecto");
     }
     setTimeout(()=>{
-       for(casilla of document.querySelectorAll(".incorrecto")){
+       for(let casilla of document.querySelectorAll(".incorrecto")){
       casilla.classList.remove("incorrecto");
     }
     },1000)
@@ -503,27 +503,29 @@ console.log(sopaDeLetras);
 
 //importo el cronometro del fichero cronometro.js
 import { cronometrar } from "./cronometro.js";
-let cronometro = setInterval(cronometrar, 1000);
-//Al hacer clic en el boton empezar aparece la tabla y se esconde el botón.
+
+// let cronometro = setInterval(cronometrar, 1000);
+//Al hacer clic en el boton empezar aparece la tabla 
+// y se esconde el botón.
+var crono;
 let botonComenzar = document.getElementById("bEmpezar");
 botonComenzar.addEventListener("click", (e)=>{
 mostrarTabla(sopaDeLetras);
 botonComenzar.classList.add("desaparecido");
-cronometro;
+ crono = setInterval(cronometrar,1000);
 } );
 //para parar el cronometro
 
 function pararCronometro() {
-    clearInterval(cronometro);  
-
+    clearInterval(crono);  
 }
-
+import { guardarTiempoJuego,mostrarPosicion } from "./tablaPuntuacion.js";
 function findeJuego() {
 pararCronometro();
 const nombre=prompt("Has terminado el juego! Introduce tu nombre:");
 const tiempoJuego=guardarTiempoJuego();
 console.log("Tiempo de juego en segundos: ", tiempoJuego);
-guardarTiempo(nombre, tiempoJuego);
+guardarTiempoJuego(nombre, tiempoJuego);
 mostrarPosicion();  
 }
 //Para crear la tabla de las palabras a buscar
@@ -542,16 +544,40 @@ listaPalabrasATachar(arrayPalabras);
 //Función para tachar las palabras encontradas en la lista de palabras a buscar
 function tacharPalabras(palSelec, revPalb, aPalabras) {
   let palabraOk=null;
+  
   if (aPalabras.includes(palSelec) ){ 
      palabraOk=palSelec ;
   } else if (aPalabras.includes(revPalb)){
      palabraOk=revPalb;
   }
   var aListaPalabras=document.getElementsByClassName("divPalabrasATachar");
+  
   //cuando encuentre la palabra le cambia la clase
   for (let i = 0; i < aListaPalabras.length; i++) {
     if (aListaPalabras[i].textContent===palabraOk){
     aListaPalabras[i].classList.add("tachado");
+      console.log(i);
   } 
+  
+    // if (aListaPalabras.length===0) {
+    //   findeJuego();
+    // }
   }
+  console.log("num Tachados:"+contarTachados());
+  console.log(porTachar(aListaPalabras));
+  let palabrasPorEliminar = porTachar(aListaPalabras);
+  if (palabrasPorEliminar===0) {
+    findeJuego();
+  }
+}
+function contarTachados() {
+  let aTachados=document.getElementsByClassName("tachado")
+  let numTachados=aTachados.length;
+  console.log("Tachados"+aTachados.length);
+  return numTachados;
+}
+function porTachar(listaPalabras) {
+  let quedanPorTachar=listaPalabras.length-contarTachados();
+  console.log("quedan: "+quedanPorTachar)
+  return quedanPorTachar;
 }
