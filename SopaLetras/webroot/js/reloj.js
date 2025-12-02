@@ -1,5 +1,7 @@
 
 
+/*
+Reloj digital*/
 function actualizarHora() {
 
     let horaActual = new Date();
@@ -17,7 +19,7 @@ function actualizarHora() {
     const contenedor = document.getElementById("reloj");
     //se borra el contenido anterior, para insertar el nuevo.
     contenedor.innerHTML = "";
-
+    //se asocian las imagenes a los numeros del reloj
     for (let i = 0; i < relojFormateado.length; i++) { 
 
         let numero = relojFormateado[i];
@@ -41,29 +43,6 @@ function actualizarHora() {
 /* ==============Se se asigna una variable al reloj para que se pueda parar en el caso de necesitarlo==================*/
 
 let relojPiePagina=setInterval(actualizarHora, 1000);// actualiza cada 1000 milisegundos
-
-
-    let minutos=0;
-    let segundos=0;
-    const contenedorCronometro = document.getElementById("cronometro");
-function cronometrar() {
-    segundos++;
-    if (segundos === 60) {
-        minutos++;
-        segundos = 0;
-    }
-   let minutosFormateados = minutos < 10 ? '0' + minutos : '' + minutos;
-    let segFormateados = segundos < 10 ? '0' + segundos : '' + segundos;
-    contenedorCronometro.textContent=minutosFormateados+ ":"+segFormateados;
-}
-let cronometro = setInterval(cronometrar, 1000);
-let pararCronometro = function() {
-    clearInterval(cronometro);
-
-}
-function guardarTiempoJuego(params) {
-    
-}
 
 
 

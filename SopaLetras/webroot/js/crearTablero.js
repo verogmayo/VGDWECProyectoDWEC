@@ -501,15 +501,31 @@ console.log(sopaDeLetras);
 // mostrarTabla(sopaDeLetras);
 
 
+//importo el cronometro del fichero cronometro.js
+import { cronometrar } from "./cronometro.js";
+let cronometro = setInterval(cronometrar, 1000);
 //Al hacer clic en el boton empezar aparece la tabla y se esconde el botón.
 let botonComenzar = document.getElementById("bEmpezar");
 botonComenzar.addEventListener("click", (e)=>{
 mostrarTabla(sopaDeLetras);
 botonComenzar.classList.add("desaparecido");
+cronometro;
 } );
+//para parar el cronometro
 
+function pararCronometro() {
+    clearInterval(cronometro);  
 
+}
 
+function findeJuego() {
+pararCronometro();
+const nombre=prompt("Has terminado el juego! Introduce tu nombre:");
+const tiempoJuego=guardarTiempoJuego();
+console.log("Tiempo de juego en segundos: ", tiempoJuego);
+guardarTiempo(nombre, tiempoJuego);
+mostrarPosicion();  
+}
 //Para crear la tabla de las palabras a buscar
 function listaPalabrasATachar(arrayDePalabras){
   const contenedorPalabras=document.querySelector(".contenedorPalabras");
@@ -523,6 +539,7 @@ function listaPalabrasATachar(arrayDePalabras){
 }
 listaPalabrasATachar(arrayPalabras);
 
+//Función para tachar las palabras encontradas en la lista de palabras a buscar
 function tacharPalabras(palSelec, revPalb, aPalabras) {
   let palabraOk=null;
   if (aPalabras.includes(palSelec) ){ 

@@ -4,6 +4,7 @@ Funcion para guardar los tiempos de juego.
 
 function guardarTiempoJuego(nombre, tiempoJuego) {
     //se leen los tiempos que hay con localStorage. https://www.w3schools.com/jsref/prop_win_localstorage.asp
+    // no se guarda en un json fisico, es un almacenamiento en el navegador.
     let tiempos = JSON.parse(localStorage.getItem("mejoresTiempos")) || [];
     //se añade el nuevo tiempo asociado  al nombre
     tiempos.push({ 

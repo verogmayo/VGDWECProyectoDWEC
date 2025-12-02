@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sopa de letras - Véro Grué</title>
-    <script src="webroot/js/crearTablero.js" defer></script>
+    <!-- para que funcione el export-import hay que poner type="module" en el enlace del script que importa -->
+    <script type="module" src="webroot/js/crearTablero.js" defer></script>
     <script src="webroot/js/tablaPuntuacion.js" defer></script>
     <script src="webroot/js/reloj.js" defer></script>
      <!-- <script src="webroot/js/seleccionarPalabras.js" defer></script> -->
@@ -20,7 +21,7 @@
         </div>
     </header>
     <main>
-       <div id="cronometro"></div>
+      
         <div class="tablaSopaLetras">
             <h2>Sopa de Letras</h2>
              <div id="bEmpezar" class="botonEmpezar">Empezar</div>
@@ -28,6 +29,7 @@
             </div>
         </div>
         <div class="tPosicion">
+             <div id="cronometro"></div>
             <h2>Mejores Tiempos</h2>
             <div id="tablaPosicion"> </div>
             <h2 class="lista">Lista de Palabras a buscar</h2>

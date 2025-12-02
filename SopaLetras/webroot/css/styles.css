@@ -62,12 +62,14 @@ main {
 #cronometro {
   width: 100px;
   height: 30px;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
   border: #7009e6 solid 2px;
-  color: black;
+  border-radius: 5px;
+  background: var(--mainColor);
+  color:white;
 }
 /* 
 Boton Empezar
