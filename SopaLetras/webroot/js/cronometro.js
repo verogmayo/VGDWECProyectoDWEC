@@ -1,4 +1,4 @@
-export {  cronometrar};
+export {  cronometrar, guardarTiempo};
 /* ==cronometro del juego======*/
     let minutos=0;
     let segundos=0;
@@ -20,7 +20,7 @@ function cronometrar() {
 
 // }
 //guardo el tiempo en segundos
-function guardarTiempo(params) {
+function guardarTiempo() {
     return minutos *60 + segundos;
 }
 

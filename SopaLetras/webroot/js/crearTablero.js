@@ -1,11 +1,11 @@
 var arrayPalabras = [
  "LUNES",
-  // "MARTES",
-  // "MIERCOLES",
-  // "JUEVES",
-  // "VIERNES",
-  // "SABADO",
-  // "DOMINGO",
+  "MARTES",
+  "MIERCOLES",
+  "JUEVES",
+  "VIERNES",
+  "SABADO",
+  "DOMINGO",
   // "ENERO",
   // "FEBRERO",
   // "MARZO",
@@ -507,8 +507,10 @@ import { cronometrar } from "./cronometro.js";
 // let cronometro = setInterval(cronometrar, 1000);
 //Al hacer clic en el boton empezar aparece la tabla 
 // y se esconde el botón.
+
 var crono;
 let botonComenzar = document.getElementById("bEmpezar");
+//Cuando se le da al boton sale la tabla y comienza el cronometro
 botonComenzar.addEventListener("click", (e)=>{
 mostrarTabla(sopaDeLetras);
 botonComenzar.classList.add("desaparecido");
@@ -520,12 +522,17 @@ function pararCronometro() {
     clearInterval(crono);  
 }
 import { guardarTiempoJuego,mostrarPosicion } from "./tablaPuntuacion.js";
+import { guardarTiempo} from "./cronometro.js";
+
 function findeJuego() {
 pararCronometro();
 const nombre=prompt("Has terminado el juego! Introduce tu nombre:");
-const tiempoJuego=guardarTiempoJuego();
+const tiempoJuego=guardarTiempo();
+
 console.log("Tiempo de juego en segundos: ", tiempoJuego);
 guardarTiempoJuego(nombre, tiempoJuego);
+console.log("Datos guardados en localStorage");
+    console.log("LocalStorage actual:", localStorage.getItem("mejoresTiempos"));
 mostrarPosicion();  
 }
 //Para crear la tabla de las palabras a buscar

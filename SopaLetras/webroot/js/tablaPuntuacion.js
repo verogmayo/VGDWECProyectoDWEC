@@ -32,12 +32,12 @@ Funcion para mostrar la tabla con los mejores tiempos
 function mostrarPosicion() {
 
    let tiempos = JSON.parse(localStorage.getItem("mejoresTiempos")) || [];
-
+     console.log(" MostrarPosicion: tabla con los datos:", tiempos);
     // Si hay menos de 3 resultados, se completa con vacíos
     while (tiempos.length < 3) {
         tiempos.push({ nombre: "-", tiempoJuego: "-" });
     }
-
+    // Crear cabecera de la tabla
     const tabla = document.createElement("table");
     const filaCabecera = document.createElement("tr");
     const thPosicion = document.createElement("th");
@@ -55,7 +55,7 @@ function mostrarPosicion() {
 
     tabla.appendChild(filaCabecera);
 
-    // Filas de datos
+    // Crear filas de datos
     const top3 = tiempos.slice(0, 3);//solo los tres mejores timpos. Solo 3 filas
 
     for (let i = 0; i < top3.length; i++) {
@@ -79,10 +79,13 @@ function mostrarPosicion() {
     }
 
     const contenedor = document.getElementById("tablaPosicion");
+    //hay que limpiar el contendor porque sino sale varias veces la tabla
+     contenedor.innerHTML = ""; 
     contenedor.appendChild(tabla);
+    console.log(" Contenedor mostrarPosicion:", contenedor);
 }
 
-let tablaPuntos = mostrarPosicion();
+
 
 /*  Mensaje de aviso por si las cookies están deshabilitadas*/
 
