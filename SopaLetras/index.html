@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sopa de letras - Véro Grué</title>
+    <!-- para que funcione el export-import hay que poner type="module" en el enlace del script que importa -->
+    <script type="module" src="webroot/js/crearTablero.js" defer></script>
+    <script type="module" src="webroot/js/tablaPuntuacion.js" defer></script>
+    <script src="webroot/js/reloj.js" defer></script>
+     <!-- <script src="webroot/js/seleccionarPalabras.js" defer></script> -->
+    <link rel="stylesheet" href="webroot/css/styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1>PROYECTOS DE DWEC</h1>
+        <div id="navegadorOffline">
+            Sin conexión a Internet
+        </div>
+    </header>
+    <main>
+      
+        <div class="tablaSopaLetras">
+            <h2>Sopa de Letras</h2>
+             <div id="bEmpezar" class="botonEmpezar">Empezar</div>
+            <div id="contenedorSopaLetras" class="contenedorSopaLetras">
+            </div>
+        </div>
+        <div class="tPosicion">
+             <div id="cronometro"></div>
+            <h2>Mejores Tiempos</h2>
+            <div id="tablaPosicion"> </div>
+            <h2 class="lista">Lista de Palabras a buscar</h2>
+            <div class="contenedorPalabras"></div>
+        </div> 
+    </main>
+    <footer class="footer">
+        <div class="footerContent">
+            <div>
+                <p class="copyright">
+                    2025-26 IES LOS SAUCES. &#169;Todos los derechos reservados.</p>
+                <address><a href="../index.html">Véronique Grué.</a> Fecha de Actualización :
+                    <time datetime="2025-12-29"></time> 29-12-2025
+                </address> 
+                </p>
+            </div>
+            <div>
+               <div id="reloj"></div>
+               <!-- <a class="generadorFuente" href="https://es.textstudio.com/">Generador de fuentes</a> -->
+            </div>
+            
+            
+        </div>
+
+    </footer>
+</body>
+
+</html>
