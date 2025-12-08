@@ -1,7 +1,5 @@
 export { guardarTiempoJuego, mostrarPosicion };
 
-
-
 /* 
 Funcion para guardar los tiempos de juego.
 ==================*/
