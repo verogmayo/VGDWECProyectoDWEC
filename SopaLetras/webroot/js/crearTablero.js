@@ -412,7 +412,6 @@ function selecionarCeldas(e) {
     var reversePalabra = palabraSelecionada.split("").reverse().join("");
     console.log(reversePalabra);
     comprobarPalabra(palabraSelecionada, reversePalabra, arrayPalabras);
-    console.log(comprobarPalabra(palabraSelecionada, reversePalabra, arrayPalabras))
     primeraCelda = null;
   }
 
@@ -504,11 +503,10 @@ console.log(sopaDeLetras);
 //importo el cronometro del fichero cronometro.js
 import { cronometrar } from "./cronometro.js";
 
-// let cronometro = setInterval(cronometrar, 1000);
-//Al hacer clic en el boton empezar aparece la tabla 
-// y se esconde el botón.
+
 
 var crono;
+
 let botonComenzar = document.getElementById("bEmpezar");
 //Cuando se le da al boton sale la tabla y comienza el cronometro
 botonComenzar.addEventListener("click", (e) => {
@@ -517,6 +515,17 @@ botonComenzar.addEventListener("click", (e) => {
   crono = setInterval(cronometrar, 1000);
 });
 //para parar el cronometro
+
+function borrarTabla() {
+  
+}
+ let btnEmpezarDeNuevo=document.getElementById("btnVolverEmpezar");
+ btnEmpezarDeNuevo.addEventListener("click",(e)=>{
+  mostrarTabla(sopaDeLetras);
+  botonComenzar.classList.add("desaparecido");
+  crono = setInterval(cronometrar, 1000);
+ })
+
 
 function pararCronometro() {
   clearInterval(crono);
@@ -555,10 +564,7 @@ function tacharPalabras(palSelec, revPalb, aPalabras) {
       console.log(i);
     }
 
-    // if (aListaPalabras.length===0) {
-    //   findeJuego();
-    // }
-  }
+ }
 
   console.log("num Tachados:" + contarTachados());
   console.log(porTachar(aListaPalabras));

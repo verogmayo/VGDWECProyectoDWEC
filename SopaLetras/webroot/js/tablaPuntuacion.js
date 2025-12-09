@@ -23,6 +23,8 @@ function guardarTiempoJuego(nombre, tiempoJuego) {
 }
 
 
+
+
 /* 
 Funcion para mostrar la tabla con los mejores tiempos
 ==================*/
