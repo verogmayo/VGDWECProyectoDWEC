@@ -82,7 +82,7 @@ function mostrarPosicion() {
     //hay que limpiar el contendor porque sino sale varias veces la tabla
      contenedor.innerHTML = ""; 
     contenedor.appendChild(tabla);
-    console.log(" Contenedor mostrarPosicion:", contenedor);
+    //console.log(" Contenedor mostrarPosicion:", contenedor);
 }
 
 
