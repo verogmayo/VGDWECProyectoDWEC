@@ -16,6 +16,7 @@
   box-sizing: border-box;
   text-decoration: none;
   border: none;
+  user-select: none;
 }
 html {
   height: 100vh;
@@ -124,6 +125,21 @@ td.correcto{
 /* 
 tabla ranking
 =====================================================*/
+.cabeceraPosicion{
+  display: flex;
+}
+.btnVolverEmpezar{
+  width: 100px;
+ border: #7009e6 solid 2px;
+ background-color: var(--mainColor);
+ border-radius: 5px;
+  color: white;
+  font-size: 18px;
+text-wrap-mode: wrap;
+text-align: center;
+font-weight: bold;
+padding: 5px;
+}
 .tPosicion {
   border-radius: 10px;
   padding: 10px 50px;

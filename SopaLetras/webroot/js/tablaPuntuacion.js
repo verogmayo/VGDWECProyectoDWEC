@@ -1,7 +1,5 @@
 export { guardarTiempoJuego, mostrarPosicion };
 
-
-
 /* 
 Funcion para guardar los tiempos de juego.
 ==================*/
@@ -23,6 +21,8 @@ function guardarTiempoJuego(nombre, tiempoJuego) {
 
     console.log("Tiempo guardado: ", {nombre, tiempoJuego});
 }
+
+
 
 
 /* 
@@ -82,7 +82,7 @@ function mostrarPosicion() {
     //hay que limpiar el contendor porque sino sale varias veces la tabla
      contenedor.innerHTML = ""; 
     contenedor.appendChild(tabla);
-    console.log(" Contenedor mostrarPosicion:", contenedor);
+    //console.log(" Contenedor mostrarPosicion:", contenedor);
 }
 
 
