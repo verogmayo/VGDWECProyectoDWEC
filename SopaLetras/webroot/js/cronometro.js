@@ -1,4 +1,4 @@
-export {  cronometrar, guardarTiempo};
+export {  cronometrar, guardarTiempo, ponerCronoACero};
 /* ==cronometro del juego======*/
     let minutos=0;
     let segundos=0;
@@ -14,13 +14,16 @@ function cronometrar() {
     let segFormateados = segundos < 10 ? '0' + segundos : '' + segundos;
     contenedorCronometro.textContent=minutosFormateados+ ":"+segFormateados;
 }
-// let cronometro = setInterval(cronometrar, 1000);
-// let pararCronometro = function() {
-//     clearInterval(cronometro);
 
-// }
 //guardo el tiempo en segundos
 function guardarTiempo() {
     return minutos *60 + segundos;
+}
+
+function ponerCronoACero() {
+minutos=0;
+segundos=0;
+//Para poner el contenido a cero, sino sale a 1 sin pasar por 0
+contenedorCronometro.textContent = "00:00";
 }
 

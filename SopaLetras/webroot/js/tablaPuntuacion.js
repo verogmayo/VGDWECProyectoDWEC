@@ -1,4 +1,4 @@
-export { guardarTiempoJuego, mostrarPosicion };
+export { guardarTiempoJuego, mostrarPosicion,esTiempoTop3 };
 
 /* 
 Funcion para guardar los tiempos de juego.
@@ -22,7 +22,17 @@ function guardarTiempoJuego(nombre, tiempoJuego) {
     console.log("Tiempo guardado: ", {nombre, tiempoJuego});
 }
 
-
+function esTiempoTop3(tiempoJuego) {
+    let tiempos = JSON.parse(localStorage.getItem("mejoresTiempos")) || [];
+    //si hay meno de 3 tiempos entonces esta en el top3
+    if(tiempos.length<3){
+        return true;
+    }
+    //se comparan los tiempos con el peor tiempo para ver si es mejor o no. saca el valor del 3er puesto
+    let peorTiempo=tiempos[tiempos.length-1].tiempoJuego;
+    //se rotorna true o false si cumple o no la condicion
+    return tiempoJuego<peorTiempo;
+}
 
 
 /* 
@@ -67,6 +77,13 @@ function mostrarPosicion() {
 
         const celdaJug = document.createElement("td");
         celdaJug.textContent = top3[i].nombre;
+        // //crear un input dentro de la celda pra que el usuario pueda escribir su nombre
+        // const inputNombre = document.createElement("input");
+        // //indicar el tipo del input
+        // inputNombre.type = "text";
+        // inputNombre.value= top3[i].nombre;
+        // //añadir el input a la celda
+        // celdaJug.appendChild(inputNombre); 
 
         const celdaTiempo = document.createElement("td");
         celdaTiempo.textContent = top3[i].tiempoJuego;

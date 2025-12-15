@@ -9,7 +9,7 @@
     <script type="module" src="webroot/js/crearTablero.js" defer></script>
     <script type="module" src="webroot/js/tablaPuntuacion.js" defer></script>
     <script src="webroot/js/reloj.js" defer></script>
-     <!-- <script src="webroot/js/seleccionarPalabras.js" defer></script> -->
+    <!-- <script src="webroot/js/seleccionarPalabras.js" defer></script> -->
     <link rel="stylesheet" href="webroot/css/styles.css">
 </head>
 
@@ -21,13 +21,13 @@
         </div>
     </header>
     <main>
-      
+
         <div class="tablaSopaLetras">
             <h2>Sopa de Letras</h2>
-             <div id="bEmpezar" class="botonEmpezar">Empezar</div>
+            <div id="bEmpezar" class="botonEmpezar">Empezar</div>
             <div id="contenedorSopaLetras" class="contenedorSopaLetras">
             </div>
-            
+
         </div>
         <div class="tPosicion">
             <div class="cabeceraPosicion">
@@ -36,12 +36,29 @@
                 </div>
                 <div id="cronometro"></div>
             </div>
-             
-            <h2>Mejores Tiempos</h2>
-            <div id="tablaPosicion"> </div>
             <h2 class="lista">Lista de Palabras a buscar</h2>
             <div class="contenedorPalabras"></div>
-        </div> 
+            <h2>Mejores Tiempos</h2>
+            <div id="tablaPosicion"> </div>
+
+        </div>
+
+        <div id="finDeJuego" class="divOculto">
+            <div class="divContenido">
+                <h3>Juego Terminado</h3>
+            <div id="inputTop3" class="oculto">
+                <h4>Felicidades, estás en el top 3!</h4>
+                <p>Introduce tu nombre para guardar el record: </p>
+                <input type="text" id="inputNombre" name="inputNombre" maxlength="15" placeholder="Tu nombre">
+                <button id="btnGuardarTiempo" class="btnGuardarTiempo">Guardar Tiempo</button>
+            </div>
+            <div id="msjNormal" class="oculto">
+                <p>Felicidades has encontrado todas las palabras!</p>
+                <button id="btnCerrar" class="btnCerrar">Cerrar</button>
+            </div>
+            </div>
+            
+        </div>
     </main>
     <footer class="footer">
         <div class="footerContent">
@@ -50,15 +67,15 @@
                     2025-26 IES LOS SAUCES. &#169;Todos los derechos reservados.</p>
                 <address><a href="../index.html">Véronique Grué.</a> Fecha de Actualización :
                     <time datetime="2025-12-29"></time> 29-12-2025
-                </address> 
+                </address>
                 </p>
             </div>
             <div>
-               <div id="reloj"></div>
-               <!-- <a class="generadorFuente" href="https://es.textstudio.com/">Generador de fuentes</a> -->
+                <div id="reloj"></div>
+                <!-- <a class="generadorFuente" href="https://es.textstudio.com/">Generador de fuentes</a> -->
             </div>
-            
-            
+
+
         </div>
 
     </footer>
