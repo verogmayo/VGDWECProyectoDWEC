@@ -2,10 +2,10 @@ var arrayPalabras = [
   "LUNES",
   "MARTES",
   "MIERCOLES",
-  "JUEVES",
-  "VIERNES",
-  "SABADO",
-  "DOMINGO",
+  // "JUEVES",
+  // "VIERNES",
+  // "SABADO",
+  // "DOMINGO",
   // "ENERO",
   // "FEBRERO",
   // "MARZO",
@@ -516,15 +516,24 @@ botonComenzar.addEventListener("click", (e) => {
 });
 //para parar el cronometro
 
-function borrarTabla() {
-  
-}
- let btnEmpezarDeNuevo=document.getElementById("btnVolverEmpezar");
- btnEmpezarDeNuevo.addEventListener("click",(e)=>{
+//Boton para volver a empezar el juego. Borra la tabla anteror y 
+let btnEmpezarDeNuevo = document.getElementById("btnVolverEmpezar");
+btnEmpezarDeNuevo.addEventListener("click", (e) => {
+  let tablaAnterior = document.querySelector(".contenedorSopaLetras");
+  console.log(tablaAnterior);
+  while (tablaAnterior.firstChild) {
+    tablaAnterior.removeChild(tablaAnterior.firstChild);
+  }
+  //SE vuelve a crar el tablero
+  let sopaDeLetras = crearTablero(calcularDimensiones(arrayPalabras));
+  sopaDeLetras = calcularPosicionInicial(arrayPalabras, sopaDeLetras);
+  console.log(sopaDeLetras);
+  sopaDeLetras = rellenarTablero(sopaDeLetras);
+  console.log(sopaDeLetras);
   mostrarTabla(sopaDeLetras);
   botonComenzar.classList.add("desaparecido");
   crono = setInterval(cronometrar, 1000);
- })
+});
 
 
 function pararCronometro() {
@@ -564,7 +573,7 @@ function tacharPalabras(palSelec, revPalb, aPalabras) {
       console.log(i);
     }
 
- }
+  }
 
   console.log("num Tachados:" + contarTachados());
   console.log(porTachar(aListaPalabras));
@@ -590,30 +599,82 @@ function porTachar(listaPalabras) {
 
 
 //FIN DE JUEGO
+ 
 
-import { guardarTiempoJuego, mostrarPosicion } from "./tablaPuntuacion.js";
+
+
+import { guardarTiempoJuego, mostrarPosicion, esTiempoTop3 } from "./tablaPuntuacion.js";
 import { guardarTiempo } from "./cronometro.js";
+//funcion para mostrar el div de fin de juego
+function mostrarDivFinDeJuego() {
+  let divFinDeJuego=document.getElementById("finDeJuego");
+  let msjTop3=document.getElementById("inputTop3");
+  let msjNormal=document.getElementById("msjNormal");
+  let inputNombre=document.getElementById("inputNombre")
+  //se comprueba si el tiempo está en el top3
+  let esTop3=esTiempoTop3(tiempoJuego);
 
+  if (esTop3) {
+    divFinDeJuego.classList.remove("oculto");
+    msjTop3.classList.remove("oculto");
+    msjNormal.classList.add("oculto");
+    inputNombre.value="";//se limpia el input
+  }else{
+    divFinDeJuego.classList.remove("oculto");
+    msjTop3.classList.add("oculto");
+    msjNormal.classList.remove("oculto");
+  }
+}
+
+//funcion para cerrar el div
+function cerrarDiv(params) {
+  let divFinDeJuego=document.getElementById("finDeJuego");
+  divFinDeJuego.classList.add("oculto");
+}
+//funcion para enviar el nombre
+function enviarNombre() {
+  let inputNombre=document.getElementById(inputNombre);
+  let nombre=inputNombre.value;
+  //se guarda el tiempo y el nombre
+  guardarTiempoJuego(nombre,tiempoJuego);
+
+  //se cierra el div
+  cerrarDiv();
+
+  //se muestra la tabla
+  mostrarPosicion();
+}
+
+
+        btnGuardar.addEventListener("click", enviarNombre);
+    
+    
+   
+        btnCerrar.addEventListener("click", cerrarDiv);
+    
+mostrarPosicion();
 function findeJuego() {
   //se para el cronometro
   pararCronometro();
   //se pide el nombre del jugador
-  const nombre = prompt("Has terminado el juego! Introduce tu nombre:");
+  //const nombre = prompt("Has terminado el juego! Introduce tu nombre:");
   //se guarda el tiempo en segundos
   const tiempoJuego = guardarTiempo();
 
   //Si no hay nombre(o se da a cancelar) o está vacío no se guarda el tiempo
-  if (!nombre || nombre.trim() === "") {
-    console.log("Juego terminado, nombre no introducido. No se guarda el tiempo.");
-    mostrarPosicion(); // Si el usuario le da a cancelar o no introduce un nombre, no se guarda el tiempo.
-    return;
-  }
-
+  // if (!nombre || nombre.trim() === "") {
+  //   console.log("Juego terminado, nombre no introducido. No se guarda el tiempo.");
+  //   mostrarPosicion(); // Si el usuario le da a cancelar o no introduce un nombre, no se guarda el tiempo.
+  //   return;
+  // }
+ 
   console.log("Tiempo de juego en segundos: ", tiempoJuego);
   //SE guarda el tiempo y el nombre en localStorage
+  
   guardarTiempoJuego(nombre, tiempoJuego);
+  mostrarDivFinDeJuego();
   console.log("Datos guardados en localStorage");
   console.log("LocalStorage actual:", localStorage.getItem("mejoresTiempos"));
   //se muestra la tabla de puntuacion
-  mostrarPosicion();
+// mostrarPosicion();
 }
