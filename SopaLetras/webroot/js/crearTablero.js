@@ -1,7 +1,7 @@
 var arrayPalabras = [
   "LUNES",
-  "MARTES",
-  "MIERCOLES",
+  // "MARTES",
+  // "MIERCOLES",
   // "JUEVES",
   // "VIERNES",
   // "SABADO",
@@ -606,58 +606,61 @@ function porTachar(listaPalabras) {
 import { guardarTiempoJuego, mostrarPosicion, esTiempoTop3 } from "./tablaPuntuacion.js";
 import { guardarTiempo } from "./cronometro.js";
 //funcion para mostrar el div de fin de juego
-function mostrarDivFinDeJuego() {
-  let divFinDeJuego=document.getElementById("finDeJuego");
-  let msjTop3=document.getElementById("inputTop3");
-  let msjNormal=document.getElementById("msjNormal");
-  let inputNombre=document.getElementById("inputNombre")
-  //se comprueba si el tiempo está en el top3
-  let esTop3=esTiempoTop3(tiempoJuego);
+mostrarPosicion();
+// function mostrarDivFinDeJuego() {
+//   let divFinDeJuego=document.getElementById("finDeJuego");
+//   let msjTop3=document.getElementById("inputTop3");
+//   let msjNormal=document.getElementById("msjNormal");
+//   let inputNombre=document.getElementById("inputNombre")
+//   //se comprueba si el tiempo está en el top3
+//   let esTop3=esTiempoTop3(tiempoJuego);
 
-  if (esTop3) {
-    divFinDeJuego.classList.remove("oculto");
-    msjTop3.classList.remove("oculto");
-    msjNormal.classList.add("oculto");
-    inputNombre.value="";//se limpia el input
-  }else{
-    divFinDeJuego.classList.remove("oculto");
-    msjTop3.classList.add("oculto");
-    msjNormal.classList.remove("oculto");
-  }
-}
+//   if (esTop3) {
+//     // divFinDeJuego.classList.remove("oculto");
+//     divFinDeJuego.display.block;
+//     msjTop3.classList.remove("oculto");
+//     msjNormal.classList.add("oculto");
+//     inputNombre.value="";//se limpia el input
+//   }else{
+//     // divFinDeJuego.classList.remove("oculto");
+//     divFinDeJuego.display.block;
+//     msjTop3.classList.add("oculto");
+//     msjNormal.classList.remove("oculto");
+//   }
+// }
 
-//funcion para cerrar el div
-function cerrarDiv(params) {
-  let divFinDeJuego=document.getElementById("finDeJuego");
-  divFinDeJuego.classList.add("oculto");
-}
-//funcion para enviar el nombre
-function enviarNombre() {
-  let inputNombre=document.getElementById(inputNombre);
-  let nombre=inputNombre.value;
-  //se guarda el tiempo y el nombre
-  guardarTiempoJuego(nombre,tiempoJuego);
+// //funcion para cerrar el div
+// function cerrarDiv(params) {
+//   let divFinDeJuego=document.getElementById("finDeJuego");
+//   divFinDeJuego.classList.add("oculto");
+// }
+// //funcion para enviar el nombre
+// function enviarNombre() {
+//   let inputNombre=document.getElementById(inputNombre);
+//   let nombre=inputNombre.value;
+//   //se guarda el tiempo y el nombre
+//   guardarTiempoJuego(nombre,tiempoJuego);
 
-  //se cierra el div
-  cerrarDiv();
+//   //se cierra el div
+//   cerrarDiv();
 
-  //se muestra la tabla
-  mostrarPosicion();
-}
+//   //se muestra la tabla
+//   mostrarPosicion();
+// }
 
 
-        btnGuardar.addEventListener("click", enviarNombre);
+        // btnGuardar.addEventListener("click", enviarNombre);
     
     
    
-        btnCerrar.addEventListener("click", cerrarDiv);
+        // btnCerrar.addEventListener("click", cerrarDiv);
     
-mostrarPosicion();
+
 function findeJuego() {
   //se para el cronometro
   pararCronometro();
   //se pide el nombre del jugador
-  //const nombre = prompt("Has terminado el juego! Introduce tu nombre:");
+  const nombre = prompt("Has terminado el juego! Introduce tu nombre:");
   //se guarda el tiempo en segundos
   const tiempoJuego = guardarTiempo();
 

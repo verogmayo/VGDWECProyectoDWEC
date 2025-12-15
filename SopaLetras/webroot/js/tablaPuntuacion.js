@@ -1,4 +1,4 @@
-export { guardarTiempoJuego, mostrarPosicion };
+export { guardarTiempoJuego, mostrarPosicion,esTiempoTop3 };
 
 /* 
 Funcion para guardar los tiempos de juego.

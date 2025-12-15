@@ -241,7 +241,9 @@ a {
 /* 
 div fin de juego
 =====================================================*/
-
+/* .divOculto{
+  display: none;
+} */
 #finDeJuego{
   position:fixed;
   z-index: 1000;
@@ -252,12 +254,13 @@ div fin de juego
   background-color: var(--otherColor);
   border: solid var(--mainColor);
   border-radius: 5px;
-  display: flex;
+  display: none;
   
 }
-.divOculto{
-  display: none;
-}
+/* .divOculto{
+  display: block;
+} */
+
 .divContenido{
 flex-direction: column;
   justify-content: center;
