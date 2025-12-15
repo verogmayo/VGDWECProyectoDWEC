@@ -241,38 +241,37 @@ a {
 /* 
 div fin de juego
 =====================================================*/
-/* .divOculto{
+.divOculto{
   display: none;
-} */
+}
 #finDeJuego{
   position:fixed;
   z-index: 1000;
   left: 35%;
   top: 20%;
   width: 400px;
-  height: 400px;
-  background-color: var(--otherColor);
+  height: 300px;
+  background-color: var(--secondColor);
   border: solid var(--mainColor);
   border-radius: 5px;
-  display: none;
   
 }
-/* .divOculto{
-  display: block;
-} */
+
 
 .divContenido{
 flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   font-size: 24px;
-  color: white;
+  padding-top: 15px;
 }
 .oculto{
   display: none;
 }
-
+@media (max-width: 992px) {
+  #finDeJuego{
+   left:20%;
+  }
+}
 #inputNombre{
   font-size: 20px;
   margin-top: 15px;

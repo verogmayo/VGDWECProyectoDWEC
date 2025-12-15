@@ -20,6 +20,9 @@ var arrayPalabras = [
   // "DICIEMBRE"
 ];
 
+
+
+/*CREACIÓN DE LA TABLA---------------------------------*/
 /**
  *
  * @returns lista de las palabras ordenadas
@@ -500,10 +503,10 @@ console.log(sopaDeLetras);
 // mostrarTabla(sopaDeLetras);
 
 
+
+/*BOTON COMENZAR EL JUEGO-------------------------*/
 //importo el cronometro del fichero cronometro.js
-import { cronometrar } from "./cronometro.js";
-
-
+import { cronometrar,ponerCronoACero } from "./cronometro.js";
 
 var crono;
 
@@ -515,15 +518,28 @@ botonComenzar.addEventListener("click", (e) => {
   crono = setInterval(cronometrar, 1000);
 });
 //para parar el cronometro
+function pararCronometro() {
+  clearInterval(crono);
+}
+
 
 //Boton para volver a empezar el juego. Borra la tabla anteror y 
 let btnEmpezarDeNuevo = document.getElementById("btnVolverEmpezar");
 btnEmpezarDeNuevo.addEventListener("click", (e) => {
   let tablaAnterior = document.querySelector(".contenedorSopaLetras");
+  pararCronometro();
+  ponerCronoACero();
   console.log(tablaAnterior);
   while (tablaAnterior.firstChild) {
     tablaAnterior.removeChild(tablaAnterior.firstChild);
   }
+
+  //hay que borrar las palabras ya tachadas para que slaga bien el div de fin de juego
+  let palabrasTachadas=document.querySelectorAll(".divPalabrasATachar");
+  palabrasTachadas.forEach(palabra =>{
+    palabra.classList.remove("tachado");
+      });
+
   //SE vuelve a crar el tablero
   let sopaDeLetras = crearTablero(calcularDimensiones(arrayPalabras));
   sopaDeLetras = calcularPosicionInicial(arrayPalabras, sopaDeLetras);
@@ -531,14 +547,13 @@ btnEmpezarDeNuevo.addEventListener("click", (e) => {
   sopaDeLetras = rellenarTablero(sopaDeLetras);
   console.log(sopaDeLetras);
   mostrarTabla(sopaDeLetras);
-  botonComenzar.classList.add("desaparecido");
+  //botonComenzar.classList.add("desaparecido");
   crono = setInterval(cronometrar, 1000);
 });
 
 
-function pararCronometro() {
-  clearInterval(crono);
-}
+
+/*TABLA DE LAS PALABRAS A BUSCAR Y FUNCIONES PARA TACHAR*/ 
 
 //Para crear la tabla de las palabras a buscar
 function listaPalabrasATachar(arrayDePalabras) {
@@ -578,6 +593,13 @@ function tacharPalabras(palSelec, revPalb, aPalabras) {
   console.log("num Tachados:" + contarTachados());
   console.log(porTachar(aListaPalabras));
   let palabrasPorEliminar = porTachar(aListaPalabras);
+  console.log("¿palabrasPorEliminar === 0?", palabrasPorEliminar === 0);
+
+  console.log("Tipo de palabrasPorEliminar:", typeof palabrasPorEliminar);
+  console.log("Valor exacto:", palabrasPorEliminar);
+  console.log("¿palabrasPorEliminar === 0?", palabrasPorEliminar === 0);
+  console.log("¿palabrasPorEliminar == 0?", palabrasPorEliminar == 0);
+
   if (palabrasPorEliminar === 0) {
     findeJuego();
   }
@@ -598,7 +620,8 @@ function porTachar(listaPalabras) {
 }
 
 
-//FIN DE JUEGO
+
+/*FIN DE JUEGO ----------------------------*/
  
 
 
@@ -607,77 +630,78 @@ import { guardarTiempoJuego, mostrarPosicion, esTiempoTop3 } from "./tablaPuntua
 import { guardarTiempo } from "./cronometro.js";
 //funcion para mostrar el div de fin de juego
 mostrarPosicion();
-// function mostrarDivFinDeJuego() {
-//   let divFinDeJuego=document.getElementById("finDeJuego");
-//   let msjTop3=document.getElementById("inputTop3");
-//   let msjNormal=document.getElementById("msjNormal");
-//   let inputNombre=document.getElementById("inputNombre")
-//   //se comprueba si el tiempo está en el top3
-//   let esTop3=esTiempoTop3(tiempoJuego);
-
-//   if (esTop3) {
-//     // divFinDeJuego.classList.remove("oculto");
-//     divFinDeJuego.display.block;
-//     msjTop3.classList.remove("oculto");
-//     msjNormal.classList.add("oculto");
-//     inputNombre.value="";//se limpia el input
-//   }else{
-//     // divFinDeJuego.classList.remove("oculto");
-//     divFinDeJuego.display.block;
-//     msjTop3.classList.add("oculto");
-//     msjNormal.classList.remove("oculto");
-//   }
-// }
-
-// //funcion para cerrar el div
-// function cerrarDiv(params) {
-//   let divFinDeJuego=document.getElementById("finDeJuego");
-//   divFinDeJuego.classList.add("oculto");
-// }
-// //funcion para enviar el nombre
-// function enviarNombre() {
-//   let inputNombre=document.getElementById(inputNombre);
-//   let nombre=inputNombre.value;
-//   //se guarda el tiempo y el nombre
-//   guardarTiempoJuego(nombre,tiempoJuego);
-
-//   //se cierra el div
-//   cerrarDiv();
-
-//   //se muestra la tabla
-//   mostrarPosicion();
-// }
+function mostrarDivFinDeJuego(tiempoJuego) {
+  let divFinDeJuego=document.getElementById("finDeJuego");
+  let msjTop3=document.getElementById("inputTop3");
+  let msjNormal=document.getElementById("msjNormal");
+  let inputNombre=document.getElementById("inputNombre")
+  //se comprueba si el tiempo está en el top3
+  let esTop3=esTiempoTop3(tiempoJuego);
+  console.log("es top 3? :",esTop3);
+  if (esTop3) {
+    divFinDeJuego.classList.remove("divOculto");
+    // divFinDeJuego.style.display = "block";
+    msjTop3.classList.remove("oculto");
+    msjNormal.classList.add("oculto");
+    inputNombre.value="";//se limpia el input
+  }else{
+    divFinDeJuego.classList.remove("divOculto");
+    //  divFinDeJuego.style.display = "block";
+    msjTop3.classList.add("oculto");
+    msjNormal.classList.remove("oculto");
+  }
+}
 
 
-        // btnGuardar.addEventListener("click", enviarNombre);
-    
-    
-   
-        // btnCerrar.addEventListener("click", cerrarDiv);
+//funcion para enviar el nombre
+function enviarNombre(tiempoJuego) {
+  let inputNombre=document.getElementById("inputNombre");
+  let nombre=inputNombre.value;
+  //se guarda el tiempo y el nombre
+  guardarTiempoJuego(nombre,tiempoJuego);
+
+  //se cierra el div
+  cerrarDiv();
+
+  //se muestra la tabla
+  mostrarPosicion();
+}
+//funcion para cerrar el div
+function cerrarDiv() {
+  let divFinDeJuego=document.getElementById("finDeJuego");
+  // divFinDeJuego.style.display="none";
+  divFinDeJuego.classList.add("divOculto");
+}
+
+
+
+
+
+
     
 
 function findeJuego() {
   //se para el cronometro
   pararCronometro();
-  //se pide el nombre del jugador
-  const nombre = prompt("Has terminado el juego! Introduce tu nombre:");
+  
   //se guarda el tiempo en segundos
   const tiempoJuego = guardarTiempo();
 
-  //Si no hay nombre(o se da a cancelar) o está vacío no se guarda el tiempo
-  // if (!nombre || nombre.trim() === "") {
-  //   console.log("Juego terminado, nombre no introducido. No se guarda el tiempo.");
-  //   mostrarPosicion(); // Si el usuario le da a cancelar o no introduce un nombre, no se guarda el tiempo.
-  //   return;
-  // }
- 
   console.log("Tiempo de juego en segundos: ", tiempoJuego);
-  //SE guarda el tiempo y el nombre en localStorage
-  
-  guardarTiempoJuego(nombre, tiempoJuego);
-  mostrarDivFinDeJuego();
+  //SE muestra el mensaje de fin de juego, el texto dependerá de la puntuacion.
+   mostrarDivFinDeJuego(tiempoJuego);
+
   console.log("Datos guardados en localStorage");
   console.log("LocalStorage actual:", localStorage.getItem("mejoresTiempos"));
-  //se muestra la tabla de puntuacion
-// mostrarPosicion();
 }
+
+//let tiempoJuegoActual=0;
+let btnGuardar=document.getElementById("btnGuardarTiempo");
+btnGuardar.addEventListener("click", ()=>{
+  let tiempoJuego=guardarTiempo();
+  enviarNombre(tiempoJuego);
+});
+
+//para cerrar el div de fin de juego
+let btnCerrar=document.getElementById("btnCerrar");
+  btnCerrar.addEventListener("click", cerrarDiv);
