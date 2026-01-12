@@ -84,6 +84,10 @@ main {
 /* 
 Boton Empezar
 =====================================================*/
+.divBotones{
+display: flex;
+gap:5px;
+}
 #bEmpezar {
   height: 80px;
   width: 300px;
@@ -92,6 +96,16 @@ Boton Empezar
   line-height: 80px;
   font-size: 30px;
   font-weight: 700;
+}
+.botonEmpezarNivel {
+  height: 50px;
+  width: 100px;
+  background-color: var(--mainColor);
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  font-weight: 700;
+  border-radius: 10px;
 }
 
 .desaparecido {

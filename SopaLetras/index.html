@@ -8,6 +8,7 @@
     <!-- para que funcione el export-import hay que poner type="module" en el enlace del script que importa -->
     <script type="module" src="webroot/js/crearTablero.js" defer></script>
     <script type="module" src="webroot/js/tablaPuntuacion.js" defer></script>
+    <script type="module" src="webroot/js/niveles.js" defer></script>
     <script src="webroot/js/reloj.js" defer></script>
     <!-- <script src="webroot/js/seleccionarPalabras.js" defer></script> -->
     <link rel="stylesheet" href="webroot/css/styles.css">
@@ -24,7 +25,13 @@
 
         <div class="tablaSopaLetras">
             <h2>Sopa de Letras</h2>
-            <div id="bEmpezar" class="botonEmpezar">Empezar</div>
+            <!-- <div id="bEmpezar" class="botonEmpezar">Empezar</div> -->
+             <div class="divBotones">
+                <div id="bEmpezarFacil" class="botonEmpezarNivel">Fácil</div>
+            <div id="bEmpezarMedio" class="botonEmpezarNivel">Medio</div>
+            <div id="bEmpezarDificil" class="botonEmpezarNivel">Dificil</div>
+             </div>
+            
             <div id="contenedorSopaLetras" class="contenedorSopaLetras">
             </div>
 

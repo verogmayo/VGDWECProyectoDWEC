@@ -1,23 +1,25 @@
+export {  crearTablero, calcularDimensiones, calcularPosicionInicial,rellenarTablero};
+
 var arrayPalabras = [
   "LUNES",
-  // "MARTES",
-  // "MIERCOLES",
-  // "JUEVES",
-  // "VIERNES",
-  // "SABADO",
-  // "DOMINGO",
-  // "ENERO",
-  // "FEBRERO",
-  // "MARZO",
-  // "ABRIL",
-  // "MAYO",
-  // "JUNIO",
-  // "JULIO",
-  // "AGOSTO",
-  // "SEPTIEMBRE",
-  // "OCTUBRE",
-  // "NOVIEMBRE",
-  // "DICIEMBRE"
+  "MARTES",
+  "MIERCOLES",
+  "JUEVES",
+  "VIERNES",
+  "SABADO",
+  "DOMINGO",
+  "ENERO",
+  "FEBRERO",
+  "MARZO",
+  "ABRIL",
+  "MAYO",
+  "JUNIO",
+  "JULIO",
+  "AGOSTO",
+  "SEPTIEMBRE",
+  "OCTUBRE",
+  "NOVIEMBRE",
+  "DICIEMBRE"
 ];
 
 
@@ -510,13 +512,13 @@ import { cronometrar,ponerCronoACero } from "./cronometro.js";
 
 var crono;
 
-let botonComenzar = document.getElementById("bEmpezar");
-//Cuando se le da al boton sale la tabla y comienza el cronometro
-botonComenzar.addEventListener("click", (e) => {
-  mostrarTabla(sopaDeLetras);
-  botonComenzar.classList.add("desaparecido");
-  crono = setInterval(cronometrar, 1000);
-});
+// let botonComenzar = document.getElementById("bEmpezar");
+// //Cuando se le da al boton sale la tabla y comienza el cronometro
+// botonComenzar.addEventListener("click", (e) => {
+//   mostrarTabla(sopaDeLetras);
+//   botonComenzar.classList.add("desaparecido");
+//   crono = setInterval(cronometrar, 1000);
+// });
 //para parar el cronometro
 function pararCronometro() {
   clearInterval(crono);
