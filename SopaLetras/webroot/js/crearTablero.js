@@ -1,5 +1,5 @@
 export {  crearTablero, calcularDimensiones, calcularPosicionInicial,rellenarTablero};
-import{nivelActual} from "./nivel.js";
+import{nivelActual} from "./niveles.js";
 var arrayPalabras = [
   "LUNES",
   "MARTES",
