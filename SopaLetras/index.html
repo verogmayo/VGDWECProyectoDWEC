@@ -8,6 +8,7 @@
     <!-- para que funcione el export-import hay que poner type="module" en el enlace del script que importa -->
     <script type="module" src="webroot/js/crearTablero.js" defer></script>
     <script type="module" src="webroot/js/tablaPuntuacion.js" defer></script>
+    <script type="module" src="webroot/js/niveles.js" defer></script>
     <script src="webroot/js/reloj.js" defer></script>
     <!-- <script src="webroot/js/seleccionarPalabras.js" defer></script> -->
     <link rel="stylesheet" href="webroot/css/styles.css">
@@ -24,21 +25,25 @@
 
         <div class="tablaSopaLetras">
             <h2>Sopa de Letras</h2>
-            <div id="bEmpezar" class="botonEmpezar">Empezar</div>
+            <!-- <div id="bEmpezar" class="botonEmpezar">Empezar</div> -->
+             <div class="divBotones">
+                <div id="bEmpezarFacil" class="botonEmpezarNivel">Fácil</div>
+            <div id="bEmpezarMedio" class="botonEmpezarNivel">Medio</div>
+            <div id="bEmpezarDificil" class="botonEmpezarNivel">Dificil</div>
+             </div>
+            
             <div id="contenedorSopaLetras" class="contenedorSopaLetras">
             </div>
 
         </div>
         <div class="tPosicion">
             <div class="cabeceraPosicion">
-                <div class="btnVolverEmpezar" id="btnVolverEmpezar">
-                    Empezar de Nuevo
-                </div>
+                
                 <div id="cronometro"></div>
             </div>
             <h2 class="lista">Lista de Palabras a buscar</h2>
             <div class="contenedorPalabras"></div>
-            <h2>Mejores Tiempos</h2>
+            <h2 class="mejoresTiempos">Mejores Tiempos</h2>
             <div id="tablaPosicion"> </div>
 
         </div>
@@ -66,7 +71,7 @@
                 <p class="copyright">
                     2025-26 IES LOS SAUCES. &#169;Todos los derechos reservados.</p>
                 <address><a href="../index.html">Véronique Grué.</a> Fecha de Actualización :
-                    <time datetime="2025-12-29"></time> 29-12-2025
+                    <time datetime="2026-01-13"></time> 13-01-2026
                 </address>
                 </p>
             </div>
