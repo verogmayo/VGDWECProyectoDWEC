@@ -4,7 +4,7 @@ export { guardarTiempoJuego, mostrarPosicion,esTiempoTop3 };
 Funcion para guardar los tiempos de juego.
 ==================*/
 
-function guardarTiempoJuego(nombre, tiempoJuego) {
+function guardarTiempoJuego(nombre, tiempoJuego,nivel) {
     //se leen los tiempos que hay con localStorage. https://www.w3schools.com/jsref/prop_win_localstorage.asp
     // no se guarda en un json fisico, es un almacenamiento en el navegador.
     //Se lee el objeto con los niveles y si no existe se crea un objeto con los 3 niveles vacios.
@@ -28,7 +28,7 @@ function guardarTiempoJuego(nombre, tiempoJuego) {
     console.log("Tiempo guardado en ${nivel}: ", {nombre, tiempoJuego});
 }
 
-function esTiempoTop3(tiempoJuego, nivel=facil) {
+function esTiempoTop3(tiempoJuego, nivel) {
     let datosPuntuacion = JSON.parse(localStorage.getItem("mejoresTiempos")) || {facil:[], medio:[],dificil:[]};
     //si hay meno de 3 tiempos entonces esta en el top3
     console.log("Nivel recibido:", nivel);
@@ -47,7 +47,7 @@ console.log("Datos disponibles:", datosPuntuacion);
 Funcion para mostrar la tabla con los mejores tiempos
 ==================*/
 
-function mostrarPosicion(nivel=facil) {
+function mostrarPosicion(nivel) {
 
     //Se lee el objeto con los niveles y si no existe se crea un objeto con los 3 niveles vacios.
     let datosPuntuacion = JSON.parse(localStorage.getItem("mejoresTiempos")) || {facil:[], medio:[],dificil:[]};

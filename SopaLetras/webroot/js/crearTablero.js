@@ -1,5 +1,5 @@
 export {  crearTablero, calcularDimensiones, calcularPosicionInicial,rellenarTablero};
-
+import{nivelActual} from "./nivel.js";
 var arrayPalabras = [
   "LUNES",
   "MARTES",
@@ -631,14 +631,14 @@ function porTachar(listaPalabras) {
 import { guardarTiempoJuego, mostrarPosicion, esTiempoTop3 } from "./tablaPuntuacion.js";
 import { guardarTiempo } from "./cronometro.js";
 //funcion para mostrar el div de fin de juego
-mostrarPosicion();
+mostrarPosicion(nivel);
 function mostrarDivFinDeJuego(tiempoJuego) {
   let divFinDeJuego=document.getElementById("finDeJuego");
   let msjTop3=document.getElementById("inputTop3");
   let msjNormal=document.getElementById("msjNormal");
   let inputNombre=document.getElementById("inputNombre")
   //se comprueba si el tiempo está en el top3
-  let esTop3=esTiempoTop3(tiempoJuego);
+  let esTop3=esTiempoTop3(tiempoJuego, nivelActual);
   console.log("es top 3? :",esTop3);
   if (esTop3) {
     divFinDeJuego.classList.remove("divOculto");
@@ -660,13 +660,13 @@ function enviarNombre(tiempoJuego) {
   let inputNombre=document.getElementById("inputNombre");
   let nombre=inputNombre.value;
   //se guarda el tiempo y el nombre
-  guardarTiempoJuego(nombre,tiempoJuego);
+  guardarTiempoJuego(nombre,tiempoJuego, nivelActual);
 
   //se cierra el div
   cerrarDiv();
 
   //se muestra la tabla
-  mostrarPosicion();
+  mostrarPosicion(nivelActual);
 }
 //funcion para cerrar el div
 function cerrarDiv() {
