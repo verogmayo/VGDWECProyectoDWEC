@@ -106,6 +106,7 @@ gap:5px;
   font-size: 30px;
   font-weight: 700;
   border-radius: 10px;
+  margin-bottom:10px ;
 }
 
 .desaparecido {
@@ -156,10 +157,15 @@ td.correcto {
 /* 
 tabla ranking
 =====================================================*/
+.mejoresTiempos{
+  padding-top:10px ;
+}
 .cabeceraPosicion {
   display: flex;
 }
-
+h3{
+  text-align: center;
+}
 .btnVolverEmpezar {
   width: 100px;
   border: #7009e6 solid 2px;
@@ -183,9 +189,9 @@ tabla ranking
   }
 }
 
-#tablaPosicion {
+/* #tablaPosicion {
   margin: 20px;
-}
+} */
 
 #tablaPosicion table {
   border-collapse: collapse;
@@ -211,12 +217,14 @@ Contenedor palabras a tachar
 .lista {
   margin-top: 50px;
   border-top: #e354f3 2px solid;
+  padding-top: 10px;
 }
 
 .contenedorPalabras {
   width: 400px;
   display: flex;
   flex-wrap: wrap;
+  background-color: var(--mainColor3);
 }
 
 .divPalabrasATachar {
