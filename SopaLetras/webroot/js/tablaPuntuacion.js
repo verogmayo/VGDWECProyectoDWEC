@@ -48,6 +48,9 @@ Funcion para mostrar la tabla con los mejores tiempos
 ==================*/
 
 function mostrarPosicion(nivelActual) {
+    if (!nivelActual) {
+        nivelActual = "facil";
+    }
 
     //Se lee el objeto con los niveles y si no existe se crea un objeto con los 3 niveles vacios.
     let datosPuntuacion = JSON.parse(localStorage.getItem("mejoresTiempos")) || {facil:[], medio:[],dificil:[]};
