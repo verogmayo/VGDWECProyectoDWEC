@@ -11,14 +11,16 @@ function guardarTiempoJuego(nombre, tiempoJuego,nivelActual) {
     let datosPuntuacion = JSON.parse(localStorage.getItem("mejoresTiempos")) || {facil:[], medio:[],dificil:[]};
 
     //Se selecciona el array correspondiente al nivel actual
+    //si utilizas los corchetes tiene que ser un string
     let tiemposNivel = datosPuntuacion[nivelActual];
 
-    //se añade el nuevo tiempo asociado  al nombre y toamndo en cuenta el nivel
+    //se añade el nuevo tiempo asociado  al nombre y tomando en cuenta el nivel
     tiemposNivel.push({ 
         nombre: nombre,
         tiempoJuego: tiempoJuego });
 
     //se ordena de menor a mayor y solo se coge 3 mejores tiempos
+    //la funcion callback tiene que cumplir unas condiciones
     tiemposNivel.sort((a, b) => a.tiempoJuego - b.tiempoJuego);
     //slice es para guardar solo los 3 primeros
     datosPuntuacion[nivelActual] = tiemposNivel.slice(0, 3); 
