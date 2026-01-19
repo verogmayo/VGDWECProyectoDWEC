@@ -1,5 +1,6 @@
 export {  crearTablero, calcularDimensiones, calcularPosicionInicial,rellenarTablero, mostrarTabla, listaPalabrasATachar,selecionarCeldas,comprobarSeleccion,comprobarPalabra,tacharPalabras,contarTachados,porTachar,findeJuego};
-import{nivelActual, pararCronometro} from "./niveles.js";
+import {findeJuego} from "./finDeJuego.js"
+
 var arrayPalabras = [
   "LUNES",
   "MARTES",
@@ -19,13 +20,13 @@ var arrayPalabras = [
   "SEPTIEMBRE",
   "OCTUBRE",
   "NOVIEMBRE",
-  "DICIEMBRE"
+  "DICIEMBRE",
+  "CUATRO"
 ];
 
 
 
 /*CREACIÓN DE LA TABLA---------------------------------*/
-
 
 /**
  * @param (array) lista de las palabras ordenadas
@@ -37,7 +38,7 @@ function calcularDimensiones(arrayOrdenado) {
   for (const element of arrayOrdenado) {
     num_letras += element.length;
   }
-  if (Math.floor(Math.sqrt(num_letras * 2)) + 1 > arrayOrdenado[0].length + 2) {
+  if (Math.floor(Math.sqrt(num_letras * 2)) + 1 > arrayOrdenado[0].length + 1) {
     dimension = Math.floor(Math.sqrt(num_letras * 2)) + 1;
   } else {
     dimension = arrayOrdenado[0].length + 2;
@@ -369,16 +370,10 @@ function mostrarTabla(tablero) {
 let primeraCelda = null;
 function selecionarCeldas(e) {
   //Solamente se puede selecionar
-  // if(e.target.tagName === "TD"){
-  // e.target.classList.add("seleccionado");
-  // }
+  
   if (primeraCelda == null) {
     //Se puede selcionar y deselecionar
-    // if(e.target.tagName === "TD"){
-    //   e.target.classList.toggle("seleccionado");
-    //con dir se ven todas las propiedades.
-    //   console.dir(e.target);
-    // }
+   
     primeraCelda = e.target;
     primeraCelda.classList.add("seleccionado");
   } else {
@@ -462,60 +457,8 @@ function comprobarPalabra(palSelec, revPalb, aPalabras) {
 }
 
 
-// console.log(crearTablero(calcularDimensiones(arrayPalabras)));
-// let sopaDeLetras = crearTablero(calcularDimensiones(arrayPalabras));
-// sopaDeLetras = calcularPosicionInicial(arrayPalabras, sopaDeLetras);
-// console.log(sopaDeLetras);
-// sopaDeLetras = rellenarTablero(sopaDeLetras);
-// console.log(sopaDeLetras);
-// mostrarTabla(sopaDeLetras);
 
 
-
-/*BOTON COMENZAR EL JUEGO-------------------------*/
-//importo el cronometro del fichero cronometro.js
-import { cronometrar,ponerCronoACero } from "./cronometro.js";
-
-var crono;
-
-// let botonComenzar = document.getElementById("bEmpezar");
-// //Cuando se le da al boton sale la tabla y comienza el cronometro
-// botonComenzar.addEventListener("click", (e) => {
-//   mostrarTabla(sopaDeLetras);
-//   botonComenzar.classList.add("desaparecido");
-//   crono = setInterval(cronometrar, 1000);
-// });
-//para parar el cronometro
-
-
-
-//Boton para volver a empezar el juego. Borra la tabla anteror y 
-// let btnEmpezarDeNuevo = document.getElementById("btnVolverEmpezar");
-// btnEmpezarDeNuevo.addEventListener("click", (e) => {
-//   let tablaAnterior = document.querySelector(".contenedorSopaLetras");
-//   pararCronometro();
-//   ponerCronoACero();
-//   console.log(tablaAnterior);
-//   while (tablaAnterior.firstChild) {
-//     tablaAnterior.removeChild(tablaAnterior.firstChild);
-//   }
-
-//   //hay que borrar las palabras ya tachadas para que slaga bien el div de fin de juego
-//   let palabrasTachadas=document.querySelectorAll(".divPalabrasATachar");
-//   palabrasTachadas.forEach(palabra =>{
-//     palabra.classList.remove("tachado");
-//       });
-
-//   //SE vuelve a crar el tablero
-//   let sopaDeLetras = crearTablero(calcularDimensiones(arrayPalabras));
-//   sopaDeLetras = calcularPosicionInicial(arrayPalabras, sopaDeLetras);
-//   console.log(sopaDeLetras);
-//   sopaDeLetras = rellenarTablero(sopaDeLetras);
-//   console.log(sopaDeLetras);
-//   mostrarTabla(sopaDeLetras);
-//   //botonComenzar.classList.add("desaparecido");
-//   crono = setInterval(cronometrar, 1000);
-// });
 
 
 
@@ -524,6 +467,7 @@ var crono;
 //Para crear la tabla de las palabras a buscar
 function listaPalabrasATachar(arrayDePalabras) {
   const contenedorPalabras = document.querySelector(".contenedorPalabras");
+  console.log("lista de palabras a tachar : "+ arrayPalabras);
   //bucle para crear un div por palabra
   arrayDePalabras.forEach(palabra => {
     const caja = document.createElement("div");
@@ -531,8 +475,10 @@ function listaPalabrasATachar(arrayDePalabras) {
     caja.textContent = palabra;
     contenedorPalabras.appendChild(caja);
   });
+
 }
 listaPalabrasATachar(arrayPalabras);
+
 
 
 
@@ -587,87 +533,6 @@ function porTachar(listaPalabras) {
 
 
 
-/*FIN DE JUEGO ----------------------------*/
+
  
 
-
-
-import { guardarTiempoJuego, mostrarPosicion, esTiempoTop3 } from "./tablaPuntuacion.js";
-import { guardarTiempo } from "./cronometro.js";
-//funcion para mostrar el div de fin de juego
-mostrarPosicion(nivelActual);
-function mostrarDivFinDeJuego(tiempoJuego) {
-  let divFinDeJuego=document.getElementById("finDeJuego");
-  let msjTop3=document.getElementById("inputTop3");
-  let msjNormal=document.getElementById("msjNormal");
-  let inputNombre=document.getElementById("inputNombre")
-  //se comprueba si el tiempo está en el top3
-  let esTop3=esTiempoTop3(tiempoJuego, nivelActual);
-  console.log("es top 3? :",esTop3);
-  if (esTop3) {
-    divFinDeJuego.classList.remove("divOculto");
-    // divFinDeJuego.style.display = "block";
-    msjTop3.classList.remove("oculto");
-    msjNormal.classList.add("oculto");
-    inputNombre.value="";//se limpia el input
-  }else{
-    divFinDeJuego.classList.remove("divOculto");
-    //  divFinDeJuego.style.display = "block";
-    msjTop3.classList.add("oculto");
-    msjNormal.classList.remove("oculto");
-  }
-}
-
-
-//funcion para enviar el nombre
-function enviarNombre(tiempoJuego) {
-  let inputNombre=document.getElementById("inputNombre");
-  let nombre=inputNombre.value;
-  //se guarda el tiempo y el nombre
-  guardarTiempoJuego(nombre,tiempoJuego, nivelActual);
-
-  //se cierra el div
-  cerrarDiv();
-
-  //se muestra la tabla
-  mostrarPosicion(nivelActual);
-}
-//funcion para cerrar el div
-function cerrarDiv() {
-  let divFinDeJuego=document.getElementById("finDeJuego");
-  // divFinDeJuego.style.display="none";
-  divFinDeJuego.classList.add("divOculto");
-}
-
-
-
-
-
-
-    
-
-function findeJuego() {
-  //se para el cronometro
-  pararCronometro();
-  
-  //se guarda el tiempo en segundos
-  const tiempoJuego = guardarTiempo();
-
-  console.log("Tiempo de juego en segundos: ", tiempoJuego);
-  //SE muestra el mensaje de fin de juego, el texto dependerá de la puntuacion.
-   mostrarDivFinDeJuego(tiempoJuego);
-
-  console.log("Datos guardados en localStorage");
-  console.log("LocalStorage actual:", localStorage.getItem("mejoresTiempos"));
-}
-
-//let tiempoJuegoActual=0;
-let btnGuardar=document.getElementById("btnGuardarTiempo");
-btnGuardar.addEventListener("click", ()=>{
-  let tiempoJuego=guardarTiempo();
-  enviarNombre(tiempoJuego);
-});
-
-//para cerrar el div de fin de juego
-let btnCerrar=document.getElementById("btnCerrar");
-  btnCerrar.addEventListener("click", cerrarDiv);

@@ -3,6 +3,7 @@ import { cronometrar, guardarTiempo, ponerCronoACero } from "./cronometro.js";
 import { mostrarPosicion } from "./tablaPuntuacion.js";
 export { nivelActual, arrayPalabrasActual, pararCronometro };
 const aPalabrasNivelFacil = ["LUNES", "MARTES", "MIERCOLES", "JUEVES"];
+//const aPalabrasNivelFacil = ["UNO", "DOS", "TRES", "CUATRO"];
 
 const aPalabrasNivelMedio = [
   "LUNES",
