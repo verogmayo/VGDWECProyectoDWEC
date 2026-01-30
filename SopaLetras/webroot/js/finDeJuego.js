@@ -1,10 +1,9 @@
 import { guardarTiempoJuego, mostrarPosicion, esTiempoTop3 } from "./tablaPuntuacion.js";
 import { guardarTiempo } from "./cronometro.js";
-import{nivelActual, pararCronometro} from "./niveles.js";
-export {findeJuego}
-//funcion para mostrar el div de fin de juego
-mostrarPosicion(nivelActual);
-function mostrarDivFinDeJuego(tiempoJuego) {
+export {findeJuego};
+
+function mostrarDivFinDeJuego(tiempoJuego, nivelActual) {
+  nivelGuardado = nivelActual; // Guardar para el evento del botón
   let divFinDeJuego=document.getElementById("finDeJuego");
   let msjTop3=document.getElementById("inputTop3");
   let msjNormal=document.getElementById("msjNormal");
@@ -28,7 +27,7 @@ function mostrarDivFinDeJuego(tiempoJuego) {
 
 
 //funcion para enviar el nombre
-function enviarNombre(tiempoJuego) {
+function enviarNombre(tiempoJuego, nivelActual) {
   let inputNombre=document.getElementById("inputNombre");
   let nombre=inputNombre.value;
   //se guarda el tiempo y el nombre
@@ -49,7 +48,7 @@ function cerrarDiv() {
 
    
 
-function findeJuego() {
+function findeJuego(nivelActual, pararCronometro) {
   //se para el cronometro
   pararCronometro();
   
@@ -58,7 +57,7 @@ function findeJuego() {
 
   console.log("Tiempo de juego en segundos: ", tiempoJuego);
   //SE muestra el mensaje de fin de juego, el texto dependerá de la puntuacion.
-   mostrarDivFinDeJuego(tiempoJuego);
+   mostrarDivFinDeJuego(tiempoJuego, nivelActual);
 
   console.log("Datos guardados en localStorage");
   console.log("LocalStorage actual:", localStorage.getItem("mejoresTiempos"));
@@ -66,9 +65,11 @@ function findeJuego() {
 
 //let tiempoJuegoActual=0;
 let btnGuardar=document.getElementById("btnGuardarTiempo");
+let nivelGuardado = null;
+
 btnGuardar.addEventListener("click", ()=>{
   let tiempoJuego=guardarTiempo();
-  enviarNombre(tiempoJuego);
+  enviarNombre(tiempoJuego, nivelGuardado);
 });
 
 //para cerrar el div de fin de juego

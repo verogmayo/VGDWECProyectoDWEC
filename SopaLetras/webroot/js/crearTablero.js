@@ -1,30 +1,5 @@
-export {  crearTablero, calcularDimensiones, calcularPosicionInicial,rellenarTablero, mostrarTabla, listaPalabrasATachar,selecionarCeldas,comprobarSeleccion,comprobarPalabra,tacharPalabras,contarTachados,porTachar,findeJuego};
+export {  crearTablero, calcularDimensiones, calcularPosicionInicial,rellenarTablero, mostrarTabla, listaPalabrasATachar};
 import {findeJuego} from "./finDeJuego.js"
-
-var arrayPalabras = [
-  "LUNES",
-  "MARTES",
-  "MIERCOLES",
-  "JUEVES",
-  "VIERNES",
-  "SABADO",
-  "DOMINGO",
-  "ENERO",
-  "FEBRERO",
-  "MARZO",
-  "ABRIL",
-  "MAYO",
-  "JUNIO",
-  "JULIO",
-  "AGOSTO",
-  "SEPTIEMBRE",
-  "OCTUBRE",
-  "NOVIEMBRE",
-  "DICIEMBRE",
-  "CUATRO"
-];
-
-
 
 /*CREACIÓN DE LA TABLA---------------------------------*/
 
@@ -37,11 +12,14 @@ function calcularDimensiones(arrayOrdenado) {
   let num_letras = 0;
   for (const element of arrayOrdenado) {
     num_letras += element.length;
+    console.log("num letras: " + num_letras);
   }
   if (Math.floor(Math.sqrt(num_letras * 2)) + 1 > arrayOrdenado[0].length + 1) {
     dimension = Math.floor(Math.sqrt(num_letras * 2)) + 1;
+    console.log("dimension por num letras: " + dimension);
   } else {
-    dimension = arrayOrdenado[0].length + 2;
+    dimension = arrayOrdenado[0].length + 1;
+    console.log("dimension por palabra mas larga: " + dimension);
   }
   return dimension;
 }
@@ -347,7 +325,7 @@ function escribirPalabras(fila, columna, direccion, palabra, tablero) {
 
 
 
-function mostrarTabla(tablero) {
+function mostrarTabla(tablero, arrayPalabras, nivelActual, pararCronometro) {
   const tabla = document.createElement("table");
   for (let i = 0; i < tablero.length; i++) {
     const fila = document.createElement("tr")
@@ -363,12 +341,12 @@ function mostrarTabla(tablero) {
   const contenedorSopaLetras = document.querySelector(".contenedorSopaLetras");
   contenedorSopaLetras.appendChild(tabla);// añade la tabla al documento
 
-  tabla.addEventListener("click", selecionarCeldas);
+  tabla.addEventListener("click", (e) => selecionarCeldas(e, arrayPalabras, nivelActual, pararCronometro));
 }
 
 
 let primeraCelda = null;
-function selecionarCeldas(e) {
+function selecionarCeldas(e, arrayPalabras, nivelActual, pararCronometro) {
   //Solamente se puede selecionar
   
   if (primeraCelda == null) {
@@ -381,7 +359,7 @@ function selecionarCeldas(e) {
     var palabraSelecionada = comprobarSeleccion(primeraCelda, celda2, e.currentTarget);
     var reversePalabra = palabraSelecionada.split("").reverse().join("");
     console.log(reversePalabra);
-    comprobarPalabra(palabraSelecionada, reversePalabra, arrayPalabras);
+    comprobarPalabra(palabraSelecionada, reversePalabra, arrayPalabras, nivelActual, pararCronometro);
     primeraCelda = null;
   }
 
@@ -432,7 +410,7 @@ function comprobarSeleccion(primCelda, cel2, tbl) {
   return letrasSeleccionadas;
 }
 
-function comprobarPalabra(palSelec, revPalb, aPalabras) {
+function comprobarPalabra(palSelec, revPalb, aPalabras, nivelActual, pararCronometro) {
 
   if (aPalabras.includes(palSelec) || aPalabras.includes(revPalb)) {
     let seleccionado = document.querySelectorAll(".seleccionado")
@@ -441,7 +419,7 @@ function comprobarPalabra(palSelec, revPalb, aPalabras) {
       casilla.classList.remove("seleccionado");
       casilla.classList.add("correcto");
     }
-    tacharPalabras(palSelec, revPalb, aPalabras);
+    tacharPalabras(palSelec, revPalb, aPalabras, nivelActual, pararCronometro);
   } else {
     for (let casilla of document.querySelectorAll(".seleccionado")) {
       casilla.classList.remove("seleccionado");
@@ -467,7 +445,7 @@ function comprobarPalabra(palSelec, revPalb, aPalabras) {
 //Para crear la tabla de las palabras a buscar
 function listaPalabrasATachar(arrayDePalabras) {
   const contenedorPalabras = document.querySelector(".contenedorPalabras");
-  console.log("lista de palabras a tachar : "+ arrayPalabras);
+  console.log("lista de palabras a tachar : "+ arrayDePalabras);
   //bucle para crear un div por palabra
   arrayDePalabras.forEach(palabra => {
     const caja = document.createElement("div");
@@ -477,13 +455,12 @@ function listaPalabrasATachar(arrayDePalabras) {
   });
 
 }
-listaPalabrasATachar(arrayPalabras);
 
 
 
 
 //Función para tachar las palabras encontradas en la lista de palabras a buscar
-function tacharPalabras(palSelec, revPalb, aPalabras) {
+function tacharPalabras(palSelec, revPalb, aPalabras, nivelActual, pararCronometro) {
   let palabraOk = null;
 
   if (aPalabras.includes(palSelec)) {
@@ -513,7 +490,7 @@ function tacharPalabras(palSelec, revPalb, aPalabras) {
   console.log("¿palabrasPorEliminar == 0?", palabrasPorEliminar == 0);
 
   if (palabrasPorEliminar === 0) {
-    findeJuego();
+    findeJuego(nivelActual, pararCronometro);
   }
 }
 
@@ -530,9 +507,3 @@ function porTachar(listaPalabras) {
   console.log("quedan: " + quedanPorTachar)
   return quedanPorTachar;
 }
-
-
-
-
- 
-
