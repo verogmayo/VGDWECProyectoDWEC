@@ -12,7 +12,7 @@
 }
 
 * {
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
@@ -86,29 +86,38 @@ Boton Empezar
 =====================================================*/
 .divBotones{
 display: flex;
+flex-direction: column;
 gap:5px;
+
 }
-#bEmpezar {
-  height: 80px;
+.btnsEs,
+.btnsFr {
+    display: flex;
+    align-items: center;/*h3 y botones alinesados verticalemente*/
+    gap: 12px;             
+}
+/* #bEmpezar {
+  height: 50px;
   width: 300px;
   background-color: var(--mainColor);
   text-align: center;
   line-height: 80px;
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 700;
-}
+} */
 .botonEmpezarNivel {
-  height: 50px;
+  height: 40px;
   width: 100px;
   background-color: var(--mainColor);
   text-align: center;
-  line-height: 50px;
-  font-size: 30px;
+  line-height: 40px;
+  font-size: 26px;
   font-weight: 700;
   border-radius: 10px;
-  margin-bottom:10px ;
 }
-
+h3{
+  min-width: 100px;
+}
 .desaparecido {
   display: none;
   /*cuando aparece la sopa desaparece el botón y la tabla ocupa su lugar*/
@@ -128,11 +137,14 @@ tabla sopa de letras
   align-items: center;
   /* height: auto; */
   height: auto;
+  justify-content: center;
+  align-items: center;
 }
 
 .tablaSopaLetras table {
   border-collapse: collapse;
   border: solid;
+  margin-top: 20px;
 }
 
 .tablaSopaLetras td {
@@ -189,9 +201,11 @@ h3{
   }
 }
 
-/* #tablaPosicion {
-  margin: 20px;
-} */
+#tablaPosicion {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
 
 #tablaPosicion table {
   border-collapse: collapse;
@@ -234,8 +248,9 @@ Contenedor palabras a tachar
 }
 
 .tachado {
-  text-decoration: line-through;
-  color: gray;
+  /* text-decoration: line-through;
+  color: gray; */
+  display: none;
 }
 
 /* 

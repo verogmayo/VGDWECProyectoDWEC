@@ -136,10 +136,7 @@ function mostrarPosicion(nivelActual) {
      tituloTabla.textContent=nivelActual;
       contenedor.appendChild(tituloTabla);
       contenedor.appendChild(tabla);
-    
     }
-     
-    
 }
  
  
