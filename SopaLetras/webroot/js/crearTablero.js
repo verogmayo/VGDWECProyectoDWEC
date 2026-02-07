@@ -434,12 +434,6 @@ function comprobarPalabra(palSelec, revPalb, aPalabras, nivelActual, pararCronom
 
 }
 
-
-
-
-
-
-
 /*TABLA DE LAS PALABRAS A BUSCAR Y FUNCIONES PARA TACHAR*/ 
 
 //Para crear la tabla de las palabras a buscar
@@ -455,9 +449,6 @@ function listaPalabrasATachar(arrayDePalabras) {
   });
 
 }
-
-
-
 
 //Función para tachar las palabras encontradas en la lista de palabras a buscar
 function tacharPalabras(palSelec, revPalb, aPalabras, nivelActual, pararCronometro) {

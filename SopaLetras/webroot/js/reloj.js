@@ -1,5 +1,3 @@
-
-
 /*
 Reloj digital*/
 function actualizarHora() {
