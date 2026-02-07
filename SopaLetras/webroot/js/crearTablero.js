@@ -1,31 +1,7 @@
-export {  crearTablero, calcularDimensiones, calcularPosicionInicial,rellenarTablero, mostrarTabla, listaPalabrasATachar,selecionarCeldas,comprobarSeleccion,comprobarPalabra,tacharPalabras,contarTachados,porTachar,findeJuego};
-import{nivelActual, pararCronometro} from "./niveles.js";
-var arrayPalabras = [
-  "LUNES",
-  "MARTES",
-  "MIERCOLES",
-  "JUEVES",
-  "VIERNES",
-  "SABADO",
-  "DOMINGO",
-  "ENERO",
-  "FEBRERO",
-  "MARZO",
-  "ABRIL",
-  "MAYO",
-  "JUNIO",
-  "JULIO",
-  "AGOSTO",
-  "SEPTIEMBRE",
-  "OCTUBRE",
-  "NOVIEMBRE",
-  "DICIEMBRE"
-];
-
-
+export {  crearTablero, calcularDimensiones, calcularPosicionInicial,rellenarTablero, mostrarTabla, listaPalabrasATachar};
+import {findeJuego} from "./finDeJuego.js"
 
 /*CREACIÓN DE LA TABLA---------------------------------*/
-
 
 /**
  * @param (array) lista de las palabras ordenadas
@@ -36,11 +12,14 @@ function calcularDimensiones(arrayOrdenado) {
   let num_letras = 0;
   for (const element of arrayOrdenado) {
     num_letras += element.length;
+    console.log("num letras: " + num_letras);
   }
-  if (Math.floor(Math.sqrt(num_letras * 2)) + 1 > arrayOrdenado[0].length + 2) {
+  if (Math.floor(Math.sqrt(num_letras * 2)) + 1 > arrayOrdenado[0].length + 1) {
     dimension = Math.floor(Math.sqrt(num_letras * 2)) + 1;
+    console.log("dimension por num letras: " + dimension);
   } else {
-    dimension = arrayOrdenado[0].length + 2;
+    dimension = arrayOrdenado[0].length + 1;
+    console.log("dimension por palabra mas larga: " + dimension);
   }
   return dimension;
 }
@@ -346,7 +325,7 @@ function escribirPalabras(fila, columna, direccion, palabra, tablero) {
 
 
 
-function mostrarTabla(tablero) {
+function mostrarTabla(tablero, arrayPalabras, nivelActual, pararCronometro) {
   const tabla = document.createElement("table");
   for (let i = 0; i < tablero.length; i++) {
     const fila = document.createElement("tr")
@@ -362,23 +341,17 @@ function mostrarTabla(tablero) {
   const contenedorSopaLetras = document.querySelector(".contenedorSopaLetras");
   contenedorSopaLetras.appendChild(tabla);// añade la tabla al documento
 
-  tabla.addEventListener("click", selecionarCeldas);
+  tabla.addEventListener("click", (e) => selecionarCeldas(e, arrayPalabras, nivelActual, pararCronometro));
 }
 
 
 let primeraCelda = null;
-function selecionarCeldas(e) {
+function selecionarCeldas(e, arrayPalabras, nivelActual, pararCronometro) {
   //Solamente se puede selecionar
-  // if(e.target.tagName === "TD"){
-  // e.target.classList.add("seleccionado");
-  // }
+  
   if (primeraCelda == null) {
     //Se puede selcionar y deselecionar
-    // if(e.target.tagName === "TD"){
-    //   e.target.classList.toggle("seleccionado");
-    //con dir se ven todas las propiedades.
-    //   console.dir(e.target);
-    // }
+   
     primeraCelda = e.target;
     primeraCelda.classList.add("seleccionado");
   } else {
@@ -386,7 +359,7 @@ function selecionarCeldas(e) {
     var palabraSelecionada = comprobarSeleccion(primeraCelda, celda2, e.currentTarget);
     var reversePalabra = palabraSelecionada.split("").reverse().join("");
     console.log(reversePalabra);
-    comprobarPalabra(palabraSelecionada, reversePalabra, arrayPalabras);
+    comprobarPalabra(palabraSelecionada, reversePalabra, arrayPalabras, nivelActual, pararCronometro);
     primeraCelda = null;
   }
 
@@ -437,7 +410,7 @@ function comprobarSeleccion(primCelda, cel2, tbl) {
   return letrasSeleccionadas;
 }
 
-function comprobarPalabra(palSelec, revPalb, aPalabras) {
+function comprobarPalabra(palSelec, revPalb, aPalabras, nivelActual, pararCronometro) {
 
   if (aPalabras.includes(palSelec) || aPalabras.includes(revPalb)) {
     let seleccionado = document.querySelectorAll(".seleccionado")
@@ -446,7 +419,7 @@ function comprobarPalabra(palSelec, revPalb, aPalabras) {
       casilla.classList.remove("seleccionado");
       casilla.classList.add("correcto");
     }
-    tacharPalabras(palSelec, revPalb, aPalabras);
+    tacharPalabras(palSelec, revPalb, aPalabras, nivelActual, pararCronometro);
   } else {
     for (let casilla of document.querySelectorAll(".seleccionado")) {
       casilla.classList.remove("seleccionado");
@@ -461,69 +434,12 @@ function comprobarPalabra(palSelec, revPalb, aPalabras) {
 
 }
 
-
-// console.log(crearTablero(calcularDimensiones(arrayPalabras)));
-// let sopaDeLetras = crearTablero(calcularDimensiones(arrayPalabras));
-// sopaDeLetras = calcularPosicionInicial(arrayPalabras, sopaDeLetras);
-// console.log(sopaDeLetras);
-// sopaDeLetras = rellenarTablero(sopaDeLetras);
-// console.log(sopaDeLetras);
-// mostrarTabla(sopaDeLetras);
-
-
-
-/*BOTON COMENZAR EL JUEGO-------------------------*/
-//importo el cronometro del fichero cronometro.js
-import { cronometrar,ponerCronoACero } from "./cronometro.js";
-
-var crono;
-
-// let botonComenzar = document.getElementById("bEmpezar");
-// //Cuando se le da al boton sale la tabla y comienza el cronometro
-// botonComenzar.addEventListener("click", (e) => {
-//   mostrarTabla(sopaDeLetras);
-//   botonComenzar.classList.add("desaparecido");
-//   crono = setInterval(cronometrar, 1000);
-// });
-//para parar el cronometro
-
-
-
-//Boton para volver a empezar el juego. Borra la tabla anteror y 
-// let btnEmpezarDeNuevo = document.getElementById("btnVolverEmpezar");
-// btnEmpezarDeNuevo.addEventListener("click", (e) => {
-//   let tablaAnterior = document.querySelector(".contenedorSopaLetras");
-//   pararCronometro();
-//   ponerCronoACero();
-//   console.log(tablaAnterior);
-//   while (tablaAnterior.firstChild) {
-//     tablaAnterior.removeChild(tablaAnterior.firstChild);
-//   }
-
-//   //hay que borrar las palabras ya tachadas para que slaga bien el div de fin de juego
-//   let palabrasTachadas=document.querySelectorAll(".divPalabrasATachar");
-//   palabrasTachadas.forEach(palabra =>{
-//     palabra.classList.remove("tachado");
-//       });
-
-//   //SE vuelve a crar el tablero
-//   let sopaDeLetras = crearTablero(calcularDimensiones(arrayPalabras));
-//   sopaDeLetras = calcularPosicionInicial(arrayPalabras, sopaDeLetras);
-//   console.log(sopaDeLetras);
-//   sopaDeLetras = rellenarTablero(sopaDeLetras);
-//   console.log(sopaDeLetras);
-//   mostrarTabla(sopaDeLetras);
-//   //botonComenzar.classList.add("desaparecido");
-//   crono = setInterval(cronometrar, 1000);
-// });
-
-
-
 /*TABLA DE LAS PALABRAS A BUSCAR Y FUNCIONES PARA TACHAR*/ 
 
 //Para crear la tabla de las palabras a buscar
 function listaPalabrasATachar(arrayDePalabras) {
   const contenedorPalabras = document.querySelector(".contenedorPalabras");
+  console.log("lista de palabras a tachar : "+ arrayDePalabras);
   //bucle para crear un div por palabra
   arrayDePalabras.forEach(palabra => {
     const caja = document.createElement("div");
@@ -531,13 +447,11 @@ function listaPalabrasATachar(arrayDePalabras) {
     caja.textContent = palabra;
     contenedorPalabras.appendChild(caja);
   });
+
 }
-listaPalabrasATachar(arrayPalabras);
-
-
 
 //Función para tachar las palabras encontradas en la lista de palabras a buscar
-function tacharPalabras(palSelec, revPalb, aPalabras) {
+function tacharPalabras(palSelec, revPalb, aPalabras, nivelActual, pararCronometro) {
   let palabraOk = null;
 
   if (aPalabras.includes(palSelec)) {
@@ -567,7 +481,7 @@ function tacharPalabras(palSelec, revPalb, aPalabras) {
   console.log("¿palabrasPorEliminar == 0?", palabrasPorEliminar == 0);
 
   if (palabrasPorEliminar === 0) {
-    findeJuego();
+    findeJuego(nivelActual, pararCronometro);
   }
 }
 
@@ -584,90 +498,3 @@ function porTachar(listaPalabras) {
   console.log("quedan: " + quedanPorTachar)
   return quedanPorTachar;
 }
-
-
-
-/*FIN DE JUEGO ----------------------------*/
- 
-
-
-
-import { guardarTiempoJuego, mostrarPosicion, esTiempoTop3 } from "./tablaPuntuacion.js";
-import { guardarTiempo } from "./cronometro.js";
-//funcion para mostrar el div de fin de juego
-mostrarPosicion(nivelActual);
-function mostrarDivFinDeJuego(tiempoJuego) {
-  let divFinDeJuego=document.getElementById("finDeJuego");
-  let msjTop3=document.getElementById("inputTop3");
-  let msjNormal=document.getElementById("msjNormal");
-  let inputNombre=document.getElementById("inputNombre")
-  //se comprueba si el tiempo está en el top3
-  let esTop3=esTiempoTop3(tiempoJuego, nivelActual);
-  console.log("es top 3? :",esTop3);
-  if (esTop3) {
-    divFinDeJuego.classList.remove("divOculto");
-    // divFinDeJuego.style.display = "block";
-    msjTop3.classList.remove("oculto");
-    msjNormal.classList.add("oculto");
-    inputNombre.value="";//se limpia el input
-  }else{
-    divFinDeJuego.classList.remove("divOculto");
-    //  divFinDeJuego.style.display = "block";
-    msjTop3.classList.add("oculto");
-    msjNormal.classList.remove("oculto");
-  }
-}
-
-
-//funcion para enviar el nombre
-function enviarNombre(tiempoJuego) {
-  let inputNombre=document.getElementById("inputNombre");
-  let nombre=inputNombre.value;
-  //se guarda el tiempo y el nombre
-  guardarTiempoJuego(nombre,tiempoJuego, nivelActual);
-
-  //se cierra el div
-  cerrarDiv();
-
-  //se muestra la tabla
-  mostrarPosicion(nivelActual);
-}
-//funcion para cerrar el div
-function cerrarDiv() {
-  let divFinDeJuego=document.getElementById("finDeJuego");
-  // divFinDeJuego.style.display="none";
-  divFinDeJuego.classList.add("divOculto");
-}
-
-
-
-
-
-
-    
-
-function findeJuego() {
-  //se para el cronometro
-  pararCronometro();
-  
-  //se guarda el tiempo en segundos
-  const tiempoJuego = guardarTiempo();
-
-  console.log("Tiempo de juego en segundos: ", tiempoJuego);
-  //SE muestra el mensaje de fin de juego, el texto dependerá de la puntuacion.
-   mostrarDivFinDeJuego(tiempoJuego);
-
-  console.log("Datos guardados en localStorage");
-  console.log("LocalStorage actual:", localStorage.getItem("mejoresTiempos"));
-}
-
-//let tiempoJuegoActual=0;
-let btnGuardar=document.getElementById("btnGuardarTiempo");
-btnGuardar.addEventListener("click", ()=>{
-  let tiempoJuego=guardarTiempo();
-  enviarNombre(tiempoJuego);
-});
-
-//para cerrar el div de fin de juego
-let btnCerrar=document.getElementById("btnCerrar");
-  btnCerrar.addEventListener("click", cerrarDiv);

@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sopa de letras - Véro Grué</title>
     <!-- para que funcione el export-import hay que poner type="module" en el enlace del script que importa -->
-    <script type="module" src="webroot/js/crearTablero.js" defer></script>
+    <!-- <script type="module" src="webroot/js/crearTablero.js" defer></script>
     <script type="module" src="webroot/js/tablaPuntuacion.js" defer></script>
-    <script type="module" src="webroot/js/niveles.js" defer></script>
-    <script src="webroot/js/reloj.js" defer></script>
+    <script type="module" src="webroot/js/niveles.js" defer></script> -->
+    <script type="module" src="webroot/js/main.js" defer></script>
     <!-- <script src="webroot/js/seleccionarPalabras.js" defer></script> -->
     <link rel="stylesheet" href="webroot/css/styles.css">
 </head>
 
 <body>
     <header class="header">
-        <h1>PROYECTOS DE DWEC</h1>
+        <h1>SOPA DE LETRAS</h1>
         <div id="navegadorOffline">
             Sin conexión a Internet
         </div>
@@ -24,45 +24,54 @@
     <main>
 
         <div class="tablaSopaLetras">
-            <h2>Sopa de Letras</h2>
+            <h2>Elije un idioma y un nivel:</h2>
             <!-- <div id="bEmpezar" class="botonEmpezar">Empezar</div> -->
-             <div class="divBotones">
-                <div id="bEmpezarFacil" class="botonEmpezarNivel">Fácil</div>
-            <div id="bEmpezarMedio" class="botonEmpezarNivel">Medio</div>
-            <div id="bEmpezarDificil" class="botonEmpezarNivel">Dificil</div>
-             </div>
-            
+            <div class="divBotones">
+                <div class="btnsEs">
+                    <h3>Español</h3>
+                    <div id="bEmpezarFacil" class="botonEmpezarNivel">Fácil</div>
+                    <div id="bEmpezarMedio" class="botonEmpezarNivel">Medio</div>
+                    <div id="bEmpezarDificil" class="botonEmpezarNivel">Dificil</div>
+                </div>
+                <div class="btnsFr">
+                    <h3>Français</h3>
+                    <div id="bEmpezarFacilFr" class="botonEmpezarNivel">Facile</div>
+                    <div id="bEmpezarMedioFr" class="botonEmpezarNivel">Moyen</div>
+                    <div id="bEmpezarDificilFr" class="botonEmpezarNivel">Difficile</div>
+                </div>
+            </div>
+
+
             <div id="contenedorSopaLetras" class="contenedorSopaLetras">
             </div>
 
         </div>
         <div class="tPosicion">
             <div class="cabeceraPosicion">
-                
+                <h3>Tiempo:</h3>
                 <div id="cronometro"></div>
             </div>
             <h2 class="lista">Lista de Palabras a buscar</h2>
             <div class="contenedorPalabras"></div>
             <h2 class="mejoresTiempos">Mejores Tiempos</h2>
             <div id="tablaPosicion"> </div>
-
         </div>
 
         <div id="finDeJuego" class="divOculto">
             <div class="divContenido">
                 <h3>Juego Terminado</h3>
-            <div id="inputTop3" class="oculto">
-                <h4>Felicidades, estás en el top 3!</h4>
-                <p>Introduce tu nombre para guardar el record: </p>
-                <input type="text" id="inputNombre" name="inputNombre" maxlength="15" placeholder="Tu nombre">
-                <button id="btnGuardarTiempo" class="btnGuardarTiempo">Guardar Tiempo</button>
+                <div id="inputTop3" class="oculto">
+                    <h4>Felicidades, estás en el top 3!</h4>
+                    <p>Introduce tu nombre para guardar el record: </p>
+                    <input type="text" id="inputNombre" name="inputNombre" maxlength="15" placeholder="Tu nombre">
+                    <button id="btnGuardarTiempo" class="btnGuardarTiempo">Guardar Tiempo</button>
+                </div>
+                <div id="msjNormal" class="oculto">
+                    <p>Felicidades has encontrado todas las palabras!</p>
+                    <button id="btnCerrar" class="btnCerrar">Cerrar</button>
+                </div>
             </div>
-            <div id="msjNormal" class="oculto">
-                <p>Felicidades has encontrado todas las palabras!</p>
-                <button id="btnCerrar" class="btnCerrar">Cerrar</button>
-            </div>
-            </div>
-            
+
         </div>
     </main>
     <footer class="footer">
@@ -71,7 +80,7 @@
                 <p class="copyright">
                     2025-26 IES LOS SAUCES. &#169;Todos los derechos reservados.</p>
                 <address><a href="../index.html">Véronique Grué.</a> Fecha de Actualización :
-                    <time datetime="2026-01-13"></time> 13-01-2026
+                    <time datetime="2026-02-07"></time>07-02-2026
                 </address>
                 </p>
             </div>

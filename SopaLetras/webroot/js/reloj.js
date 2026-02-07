@@ -1,5 +1,3 @@
-
-
 /*
 Reloj digital*/
 function actualizarHora() {
@@ -42,7 +40,7 @@ function actualizarHora() {
 
 /* ==============Se se asigna una variable al reloj para que se pueda parar en el caso de necesitarlo==================*/
 
-let relojPiePagina=setInterval(actualizarHora, 1000);// actualiza cada 1000 milisegundos
+ let relojPiePagina=setInterval(actualizarHora, 1000);// actualiza cada 1000 milisegundos
 
 
 

@@ -1,4 +1,5 @@
 export {  cronometrar, guardarTiempo, ponerCronoACero};
+
 /* ==cronometro del juego======*/
     let minutos=0;
     let segundos=0;
