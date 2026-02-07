@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Sopa de letras</title>
+</head>
+<style>
+  :root{
+    --colorFondo:rgb(168, 225, 252);
+    --colorCuenco:rgb(219, 130, 79);
+    --colorBordeCuenco:rgb(133, 58, 14);
+    --colorSopa:rgb(248, 227, 133);
+  }
+</style>
+<body>
+    <div class="logo">
+<canvas id="logo" width="500" height="500"></canvas>
+    </div>
+    <script>
+        const canvas = document.getElementById("logo");
+const ctx = canvas.getContext("2d");
+
+// Fondo 
+ctx.beginPath();
+ctx.arc(200, 170, 170, 0, Math.PI * 2); 
+ctx.fillStyle = "rgb(168, 225, 252)";
+ctx.fill();
+ctx.closePath();
+
+
+
+// cuenco
+ctx.beginPath();
+ctx.arc(200, 170, 112, 0, Math.PI); // medio círculo
+ctx.fillStyle = "rgb(219, 130, 79)"; // color del relleno del cuenco
+ctx.fill();
+ctx.closePath();
+
+// Borde del cuenco
+ctx.beginPath();
+// ctx.arc(200, 170, 115, Math.PI,0);//arco de arriba
+ctx.arc(200, 170,112,0, Math.PI);
+ctx.lineWidth = 4;
+ctx.strokeStyle = "rgb(133, 58, 14)"; //color de la linea
+ctx.stroke();
+ctx.closePath();
+
+//superficie de la sopa
+ctx.beginPath();
+ctx.ellipse(200, 170, 110, 30, 0, 0, Math.PI * 2);
+ctx.fillStyle = "rgb(248, 227, 133)"; 
+ctx.fill();
+ctx.closePath();
+
+//borde del cuenco a la superfice
+ctx.beginPath();
+ctx.ellipse(200, 170, 110, 30, 0, 0, Math.PI * 2);
+ctx.lineWidth = 4;
+ctx.strokeStyle = "rgb(133, 58, 14)"; 
+ctx.stroke();
+ctx.closePath();
+
+//Letras de dentro
+// https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textBaseline
+
+//mango de la cuchara
+ctx.beginPath();
+ctx.moveTo(300, 70);
+ctx.lineTo(250, 150);
+ctx.lineWidth = 6;
+ctx.strokeStyle = "#888";
+ctx.stroke();
+//decoración del mango de la cuchara
+ctx.beginPath();
+// ctx.ellipse(200, 170, 110, 30, 0, 0, Math.PI * 2);
+ctx.ellipse(300, 70, 10,6,15, 0, Math.PI * 2);
+ctx.fillStyle = "#bbb";
+ctx.fill();
+
+//para escribir dentro hay que guardar primero
+
+//se pone en el centro del cuenco
+ctx.translate(200, 155); 
+//se inclina el texto
+ctx.rotate(0.25); 
+
+ctx.fillStyle = "#2c3e50";
+ctx.font = "bold 26px Arial";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+
+// Altura entre líneas
+let espacio = 28;
+
+ctx.fillText("Sopa", 0, -espacio);
+ctx.fillText("de", 0, 0);
+ctx.fillText("Letras", 0, espacio);
+
+
+
+
+    </script>
+</body>
+</html>
