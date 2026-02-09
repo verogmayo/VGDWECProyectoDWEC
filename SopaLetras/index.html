@@ -26,19 +26,30 @@
         <div class="tablaSopaLetras">
             <h2>Elije un idioma y un nivel:</h2>
             <!-- <div id="bEmpezar" class="botonEmpezar">Empezar</div> -->
+             <div class="elegirIdioma">
+                <label for="es">Español</label>
+                <input type="radio" name="idioma" id="es" checked >
+                <label for="fr">Français</label>
+                <input type="radio" name="idioma" id="fr">
+             </div>
             <div class="divBotones">
-                <div class="btnsEs">
+                <div id="vistaBtnsEs" class="idiomaVisto">
+                    <div id="btnEs" class="btnsEs ">
                     <h3>Español</h3>
                     <div id="bEmpezarFacil" class="botonEmpezarNivel">Fácil</div>
                     <div id="bEmpezarMedio" class="botonEmpezarNivel">Medio</div>
                     <div id="bEmpezarDificil" class="botonEmpezarNivel">Dificil</div>
                 </div>
-                <div class="btnsFr">
+                </div>
+                <div id="vistaBtnsFr" class="idiomaOculto">
+                    <div id="btnFr" class="btnsFr ">
                     <h3>Français</h3>
                     <div id="bEmpezarFacilFr" class="botonEmpezarNivel">Facile</div>
                     <div id="bEmpezarMedioFr" class="botonEmpezarNivel">Moyen</div>
                     <div id="bEmpezarDificilFr" class="botonEmpezarNivel">Difficile</div>
                 </div>
+                </div>
+                
             </div>
 
 

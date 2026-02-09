@@ -93,8 +93,24 @@ gap:5px;
 .btnsEs,
 .btnsFr {
     display: flex;
-    align-items: center;/*h3 y botones alinesados verticalemente*/
-    gap: 12px;             
+    align-items: center;
+    gap: 12px;  
+    cursor: pointer;           
+}
+.idiomaVisto{
+  display: block;
+}
+.idiomaOculto{
+  display: none;
+}
+.elegirIdioma{
+  display: flex;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 700;
+    padding-bottom: 20px ;
+    gap: 20px;
+    
 }
 /* #bEmpezar {
   height: 50px;
