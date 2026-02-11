@@ -32,7 +32,7 @@ function enviarNombre(tiempoJuego, nivelActual) {
   let nombre=inputNombre.value;
   //se guarda el tiempo y el nombre
   guardarTiempoJuego(nombre,tiempoJuego, nivelActual);
-
+console.log("tiempo de juego div: "+tiempoJuego);
   //se cierra el div
   cerrarDiv();
 

@@ -169,8 +169,28 @@
         ctx2.moveTo(e.offsetX, e.offsetY);
       });
 
+pizarra.addEventListener("touchstart", (e) => {
+        //Si haces clic en el lienzo pintando pasa a true
+        console.log("entro en touchstrat");
+        pintando = true;
+        //comienza el nuevo trazo
+        ctx2.beginPath();
+        //se va a mover según muevas el raton. 
+        //https://www.w3schools.com/tags/canvas_moveto.asp
+        //https://www.w3schools.com/jsref/event_offsetx.asp -> devuelve la coordenada X
+        //https://www.w3schools.com/jsref/event_offsety.asp  -> devuelve la coordenada Y
+        ctx2.moveTo(e.offsetX, e.offsetY);
+      });
+      
       // Dibuja mientras se mueve
       pizarra.addEventListener("mousemove", (e) => {
+        //si pintando está false no
+        if (!pintando) return;
+        ctx2.lineTo(e.offsetX, e.offsetY);
+         ctx2.stroke();
+      });
+
+       pizarra.addEventListener("touchmove", (e) => {
         //si pintando está false no
         if (!pintando) return;
         ctx2.lineTo(e.offsetX, e.offsetY);
@@ -182,7 +202,10 @@
         pintando = false;
         ctx2.closePath();
       });
-
+pizarra.addEventListener("touchend", () => {
+        pintando = false;
+        ctx2.closePath();
+      });
       // Si el ratón sale del pizarra
       pizarra.addEventListener("mouseleave", () => {
         pintando = false;

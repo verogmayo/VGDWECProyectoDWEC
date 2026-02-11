@@ -87,8 +87,8 @@ Boton Empezar
 .divBotones{
 display: flex;
 flex-direction: column;
+align-items: center;
 gap:5px;
-
 }
 .btnsEs,
 .btnsFr {
@@ -96,6 +96,13 @@ gap:5px;
     align-items: center;
     gap: 12px;  
     cursor: pointer;           
+}
+  
+
+.botonEmpezarNivel:hover{
+  transform: scale(1.05);
+  background-color:var(--mainColor2);
+     box-shadow: 0 0 0.5rem var(--mainColor2)
 }
 .idiomaVisto{
   display: block;
